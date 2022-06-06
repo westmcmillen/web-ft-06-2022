@@ -1,0 +1,9 @@
+git status
+git is the command. status is the parameter.
+
+
+rm -rf ./Sample
+rm is the command. -rf is the option. ./Sample is the parameter.
+
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/usr/bin/ruby is the command. -e is the option. "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" is the parameter.
