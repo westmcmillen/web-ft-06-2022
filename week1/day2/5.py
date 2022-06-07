@@ -10,6 +10,9 @@ days = [
 
 def workSleep():
   day = int(input("Day (0-6)? "))
-  print(days[day])
+  if day <= 6:
+    print(days[day])
+  else:
+    print("That's outside of the range. Please try again.")
   
 workSleep()

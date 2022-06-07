@@ -1,5 +1,4 @@
 day = int(input("Day (0-6)? "))
-
 days = [
   "Monday",
   "Tuesday",
@@ -10,4 +9,7 @@ days = [
   "Sunday",
 ]
 
-print(days[day])
+if day <= 6:
+  print(days[day])
+else:
+  print("That's outside of the range. Please try again.")
