@@ -8,7 +8,7 @@ def play():
       print("You win!")
       break
     elif guess > number:
-      print(f"{guess} is too high.")
+      print(f"{ guess } is too high.")
       chances -= 1
       print(f"You have {chances} guesses left.")
     elif guess < number:
@@ -19,5 +19,3 @@ play()
 
 if input("Would you like to play again? (Y/N) ").lower() == "y":
   play()
-else:
-  print("Better luck next time!")
