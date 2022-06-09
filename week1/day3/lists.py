@@ -34,3 +34,11 @@ list4 = [5, 20, 15, 20, 25, 50, 20]
 for item in list4:
   if item == 20: list4.remove(item)
 print(list4)
+
+
+#BONUS PROBLEM
+array = [5, 1, 22, 25, 6, -1, 8, 10]
+sequence = [1, 6, -1, 10]
+def isValidSubsequence(array, sequence):
+    return all(item in array for item in sequence)
+print(isValidSubsequence(array, sequence))
