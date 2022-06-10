@@ -1,46 +1,135 @@
-print("Welcome to instructor.py")
-name = input("What is your name? ")
-print("\n")
-print(f"Hello, {name}")
-print("You are the instructor of this cohort")
-print("You have many students...")
+# import time
 
-actions = [
-  "Tell them 'Great job!'",
-  "Tell them 'You're awesome!'",
-  "Tell them 'This code is a masterpiece!'",
-  "Tell them 'You get 100 gold stars!'"
+# def fauxType(string, delay = 0.03125):
+#   for letter in string:
+#     time.sleep(delay)
+#     print(letter, end = "", flush = True)
+
+# def newLine():
+#   print("")
+
+# fauxType("Welcome to instructor.py")
+# newLine()
+# fauxType("Enter your name: ")
+# playerName = input("").lower().capitalize()
+# newLine()
+# fauxType(f"Hi, {playerName}. You are the instructor of this cohort.")
+# newLine()
+# fauxType("You have many students...")
+# newLine()
+# fauxType("One student has sent you their code to review. ")
+# newLine()
+# fauxType("Would you like to review their code? ")
+
+# play = input("").lower()
+# if play != "yes": fauxType("Let's review it anyways...")
+# else: fauxType("Great! Get ready to be impressed...")
+# newLine()
+# print("""
+# def isPalindrome(word):
+#   return word.lower == "".join([*word[::-1]])
+# """)
+# fauxType("Choose a response: ")
+# newLine()
+# newLine()
+# responses = [
+#   "You're awesome!",
+#   "Great job!",
+#   "You get 100 gold stars"
+# ]
+# for index, response in enumerate(responses):
+#   print(f"{index}. {response}")
+# newLine()
+
+# fauxType("What is your response? ")
+# response = int(input(""))
+
+# responses.remove(responses[response])
+# print("\033[A\033[A")
+# print("What is your response? ", end = "", flush = True)
+# fauxType("BREAK THEIR CODE! ", 0.1875)
+# fauxType("MU-HA-HA-HA!!!", 0.0625)
+# newLine()
+# print(f"""
+# Traceback (most recent call last):
+# File "/Users/{playerName}/web-ft-06-2022/instructor.py", line every-line, in <module>
+# all-modules("You have successfully destoyed your student's code!)
+# NameError: name '{playerName}Loses' is not defined
+# """)
+
+import time
+
+playerName = ""
+responses = [
+  "You're awesome!",
+  "Great job!",
+  "You get 100 gold stars"
 ]
+studentsRemaining = len(responses)
+count = 0
 
-def choose():
-  choices = actions
-  while len(choices) > 0:
-    choice = choices[input("What would you like to do? ")]
-    choices.remove(choice)
-  print(choices)
+def fauxType(string, delay = 0.03125):
+  for letter in string:
+    time.sleep(delay)
+    print(letter, end = "", flush = True)
 
-def printActions():
-  print("-" * 50)
-  for action in actions:
-    print(action)
-  print("-" * 50)
+def newLine():
+  print("")
+
+def welcome():
+  fauxType("Welcome to instructor.py")
+  newLine()
+  fauxType("Enter your name: ")
+  playerName = input("").lower().capitalize()
+  newLine()
+  fauxType(f"Hi, {playerName}. You are the instructor of this cohort.")
+  newLine()
+  fauxType("You have many students...")
+  newLine()
 
 def play():
-    print("One of your student's just sent you some code to review!")
-    print("\n")
-    print("Choose a response")
-    printActions()
-    choose()
+  if count == 0: fauxType("One student has sent you their code to review. ")
+  else: fauxType("Another student has sent you their code to review. ")
+  newLine()
+  fauxType("Would you like to review their code? ")
+  play = input("").lower()
+  if play != "yes": fauxType("Let's review it anyways...")
+  else: fauxType("Great! Get ready to be impressed...")
+  newLine()
+  print("""
+  def isPalindrome(word):
+    return word.lower == "".join([*word[::-1]])
+  """)
+  count = count + 1
 
-def playAgain():
-    print("Another one of your student's just sent you some code to review!")
-    print("\n")
-    print("Choose a response")
-    printActions()
-    choose()
-play()
+def respond():
+  fauxType("Choose a response: ")
+  newLine()
+  newLine()
+  for index, response in enumerate(responses):
+    print(f"{index}. {response}")
+  newLine()
+  fauxType("What is your response? ")
+  response = int(input(""))
+  responses.remove(responses[response])
+  print("\033[A\033[A")
+  print("What is your response? ", end = "", flush = True)
+  fauxType("BREAK THEIR CODE! ", 0.1875)
+  fauxType("MU-HA-HA-HA!!!", 0.0625)
+  newLine()
+  print(f"""
+  Traceback (most recent call last):
+  File "/Users/{playerName}/web-ft-06-2022/instructor.py", line every-line, in <module>
+  all-modules("You have successfully destoyed your student's code!)
+  NameError: name '{playerName}Loses' is not defined
+  """)
 
-while input("Would you like to review another student's code? (Y/N)").lower() == "y":
-  playAgain()
+while len(responses) > 0:
+  if count == 0:
+    welcome()
+    play()
+    respond()
+  play()
+  respond()
 
-print(f"Thanks for playing {name}! No one can defeat you!")
+fauxType(f"Congradulations {playerName}. You have defeated all your students!")
