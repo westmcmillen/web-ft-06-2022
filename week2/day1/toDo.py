@@ -30,7 +30,7 @@ class TaskList:
         print("")
 
 def getChoice(choices):
-    print("Select an option below")
+    print("Select an option below. Enter a number:")
     print("")
     for index, choice in enumerate(choices):
         print(f"{index}. {choice}")
