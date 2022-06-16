@@ -8,6 +8,7 @@ class Player:
         self.score = 0
         self.chances = 5
         self.guesses = []
+        self.status = ""
     
     # move out of class
     def handleChoice( self, array ):
@@ -53,8 +54,7 @@ class Player:
 Name: { self.name }
 Difficulty: { self.difficulty }
 Score: { self.score }
-Chances: { self.chances }
-Guesses: { self.guesses }
+Status: { self.status }
         """
 
 player = Player()
@@ -128,8 +128,8 @@ def printList( array ):
     for index, item in enumerate( array ):
         print( f"{ index + 1 }. { item }" )
 
-def clearLastLine():
-    print("\033[A\033[2K", end = "", flush = True)
+def clearLastLine(repeat = 1):
+    print(f"\033[{ repeat }A\033[0J", end = "", flush = True)
 
 def rePrintInput( value ):
     clearLastLine()
@@ -139,10 +139,10 @@ def handleGuess():
     guess = input( "» " ).upper()
     if guess in board.coordinates or guess[ ::-1 ] in board.coordinates:
         player.appendGuesses( guess )
-        if guess in board.joeRooms:
+        if guess in board.joeRooms or guess[ ::-1 ] in board.joeRooms:
             setTemplate( guess, "J" )
             return guess
-        if guess in board.rayleighRooms:
+        if guess in board.rayleighRooms or guess[ ::-1 ] in board.rayleighRooms:
             setTemplate( guess, "R" )
             return guess
         setTemplate( guess, "X" )
@@ -160,10 +160,11 @@ def setTemplate( guess, char = "X" ):
     spreadBoard = [ *board.template ]
     try:
         if int( guess[ 0 ] ):
-            guess = guess[ ::-1 ]
+            for row in board.rows:
+                match guess[ 1 ]:
+                    case row:
+                        spreadBoard[ 48 + ( board.rows.index( guess[ 1 ] ) * 36 ) + ( board.columns.index( guess[ 0 ] ) * 6 ) ] = char
     except:
-        pass
-    finally:
         for row in board.rows:
             match guess[ 0 ]:
                 case row:
@@ -240,23 +241,23 @@ def printGUI():
     print( board )
     print("")
 
-def clearGUI():
-    for i in range( 11 ):
-        clearLastLine()
-
 def play():
     while player.chances > 0:
         printGUI()
-        print("")
-        clearLastLine()
+        print("\n\n\n")
+        clearLastLine(4)
         guess = getGuess()
         player.decrementChances()
-        clearGUI()
-        if guess in board.joeRooms:
+        clearLastLine( 11 )
+        if guess in board.joeRooms or guess[ ::-1 ] in board.joeRooms:
             break
-        if guess in board.rayleighRooms:
+        if guess in board.rayleighRooms or guess[ ::-1 ] in board.rayleighRooms:
             player.incrementChances()
-
+    if player.chances > 0:
+        player.status = "Winner"
+    else:
+        player.status = "Loser"
+    printGUI()
 def exec():
     printIntro()
     initSettings()
@@ -265,17 +266,17 @@ def exec():
     play()
 
 exec()
-clearLastLine()
 
 while True:
+    clearLastLine(1)
+    print( player )
     choice = player.getChoice(["Retry", "Change Player", "Quit"])
     match choice:
         case "Retry":
+            clearLastLine(22)
             player.reset()
             board.reset()
             initBoard()
-            for i in range(6):
-                clearLastLine()
             play()
         case "Change Player":
             player.reset()
@@ -283,8 +284,9 @@ while True:
             exec()
         case "Quit":
             print("")
-            fauxType( f"Thanks for playing { player.name }" )
+            fauxType( f"Thanks for playing { player.name }!" )
             break
 
-
-# Figure out clearing lines for play again sequence and message from previous game and example line of directions
+# prevent duplicates guesses
+# check if name is Joe
+# launch secret game
