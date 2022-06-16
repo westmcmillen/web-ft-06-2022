@@ -46,6 +46,7 @@ class Player:
         self.guesses.append( guess )
     
     def reset( self ):
+        self.score = 0
         self.chances = 5
         self.guesses = []
     
@@ -137,16 +138,20 @@ def rePrintInput( value ):
 
 def handleGuess():
     guess = input( "» " ).upper()
-    if guess in board.coordinates or guess[ ::-1 ] in board.coordinates:
-        player.appendGuesses( guess )
-        if guess in board.joeRooms or guess[ ::-1 ] in board.joeRooms:
-            setTemplate( guess, "J" )
+    if guess not in player.guesses:
+        if guess in board.coordinates or guess[ ::-1 ] in board.coordinates:
+            player.appendGuesses( guess )
+            if guess in board.joeRooms or guess[ ::-1 ] in board.joeRooms:
+                setTemplate( guess, "J" )
+                return guess
+            if guess in board.rayleighRooms or guess[ ::-1 ] in board.rayleighRooms:
+                setTemplate( guess, "R" )
+                return guess
+            setTemplate( guess, "X" )
             return guess
-        if guess in board.rayleighRooms or guess[ ::-1 ] in board.rayleighRooms:
-            setTemplate( guess, "R" )
-            return guess
-        setTemplate( guess, "X" )
-        return guess
+        else:
+            clearLastLine()
+            getGuess()
     else:
         clearLastLine()
         getGuess()
@@ -240,6 +245,17 @@ def printGUI():
     print("")
     print( board )
     print("")
+    if player.guesses:
+        if player.guesses[-1] in board.joeRooms:
+            print( f"Congratulations { player.name }! You found Joe!" )
+        elif player.guesses[-1] in board.rayleighRooms:
+            print( f"Nice! You found Rayleigh! Bonus [+1] chance added" )
+        else:
+            print( f"Hmm... Joe isn't there. Try again!" )
+    else:
+            print( f"Hint: Enter a coordinate" )
+
+    print("")
 
 def play():
     while player.chances > 0:
@@ -247,16 +263,23 @@ def play():
         print("\n\n\n")
         clearLastLine(4)
         guess = getGuess()
-        player.decrementChances()
-        clearLastLine( 11 )
-        if guess in board.joeRooms or guess[ ::-1 ] in board.joeRooms:
+        try:
+            for guess in player.guesses:
+                if guess in board.joeRooms or guess[ ::-1 ] in board.joeRooms:
+                    player.score += player.chances * 100
+                    raise
+                if guess in board.rayleighRooms or guess[ ::-1 ] in board.rayleighRooms:
+                    player.score += 250
+                    player.incrementChances()
+        except:
             break
-        if guess in board.rayleighRooms or guess[ ::-1 ] in board.rayleighRooms:
-            player.incrementChances()
-    if player.chances > 0:
-        player.status = "Winner"
-    else:
-        player.status = "Loser"
+        player.decrementChances()
+        clearLastLine( 13 )
+    for guess in player.guesses:
+        if guess in board.joeRooms:
+            player.status = "Winner"
+        else:
+            player.status = "Loser"
     printGUI()
 def exec():
     printIntro()
@@ -287,6 +310,7 @@ while True:
             fauxType( f"Thanks for playing { player.name }!" )
             break
 
-# prevent duplicates guesses
+# move method out of class
 # check if name is Joe
 # launch secret game
+# showing loser when finding joe on last chance
