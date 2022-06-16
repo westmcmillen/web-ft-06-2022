@@ -1,6 +1,11 @@
 import time
 import random
 
+# Latest Version
+
+class Break(Exception):
+    pass
+
 class Player:
     def __init__( self ):
         self.name = ""
@@ -9,32 +14,6 @@ class Player:
         self.chances = 5
         self.guesses = []
         self.status = ""
-    
-    # move out of class
-    def handleChoice( self, array ):
-        choice = input( "» " ).lower().capitalize()
-        try:
-            choice = int( choice ) - 1
-            if choice >= 0 and choice < len( array ):
-                rePrintInput( array[ choice ] )
-                return array[ choice ]
-            else:
-                clearLastLine()
-                self.handleChoice( array )
-        except:
-            if choice in array:
-                rePrintInput( choice )
-                return choice
-            else:
-                clearLastLine()
-                self.handleChoice( array )
-    
-    # move out of class
-    def getChoice( self, array ):
-        printList( array )
-        print( "" )
-        choice = self.handleChoice( array )
-        return choice
     
     def incrementChances( self ):
         self.chances += 1
@@ -136,6 +115,30 @@ def rePrintInput( value ):
     clearLastLine()
     print( f"» { value }" )
 
+def handleChoice( array ):
+    choice = input( "» " ).lower().capitalize()
+    try:
+        choice = int( choice ) - 1
+        if choice >= 0 and choice < len( array ):
+            rePrintInput( array[ choice ] )
+            return array[ choice ]
+        else:
+            clearLastLine()
+            handleChoice( array )
+    except:
+        if choice in array:
+            rePrintInput( choice )
+            return choice
+        else:
+            clearLastLine()
+            handleChoice( array )
+
+def getChoice( array ):
+    printList( array )
+    print( "" )
+    choice = handleChoice( array )
+    return choice
+
 def handleGuess():
     guess = input( "» " ).upper()
     if guess not in player.guesses:
@@ -212,14 +215,14 @@ def initSettings():
     fauxType( "Select Difficulty:" )
     print( "\033[0;37m", end = "", flush = True )
     print( "" )
-    player.difficulty = player.getChoice(["Easy", "Normal", "Hard"] )
+    player.difficulty = getChoice(["Easy", "Normal", "Hard"] )
     print( "" )
     print( "\033[2;37m", end = "", flush = True )
     print( "\033[3;37m", end = "", flush = True )
     fauxType( f"{ player.name }, you have selected { player.difficulty }. Do you wish to continue?" )
     print( "\033[0;37m", end = "", flush = True )
     print( "" )
-    playerChoice = player.getChoice( [ "Continue", "Back" ] )
+    playerChoice = getChoice( [ "Continue", "Back" ] )
     if playerChoice == "Back":
         initSettings()
 
@@ -263,24 +266,26 @@ def play():
         print("\n\n\n")
         clearLastLine(4)
         guess = getGuess()
-        try:
-            for guess in player.guesses:
-                if guess in board.joeRooms or guess[ ::-1 ] in board.joeRooms:
-                    player.score += player.chances * 100
-                    raise
-                if guess in board.rayleighRooms or guess[ ::-1 ] in board.rayleighRooms:
-                    player.score += 250
-                    player.incrementChances()
-        except:
-            break
-        player.decrementChances()
         clearLastLine( 13 )
+        try:
+            if guess in board.joeRooms or guess[ ::-1 ] in board.joeRooms:
+                player.score += player.chances * 100
+                raise Break
+            if guess in board.rayleighRooms or guess[ ::-1 ] in board.rayleighRooms:
+                player.score += 250
+                player.incrementChances()
+        except Break:
+            break
+        except TypeError:
+            pass
+        player.decrementChances()
     for guess in player.guesses:
         if guess in board.joeRooms:
             player.status = "Winner"
         else:
             player.status = "Loser"
     printGUI()
+
 def exec():
     printIntro()
     initSettings()
@@ -291,26 +296,27 @@ def exec():
 exec()
 
 while True:
-    clearLastLine(1)
-    print( player )
-    choice = player.getChoice(["Retry", "Change Player", "Quit"])
-    match choice:
-        case "Retry":
-            clearLastLine(22)
-            player.reset()
-            board.reset()
-            initBoard()
-            play()
-        case "Change Player":
-            player.reset()
-            board.reset()
-            exec()
-        case "Quit":
-            print("")
-            fauxType( f"Thanks for playing { player.name }!" )
-            break
+        clearLastLine(1)
+        print( player )
+        choice = getChoice(["Retry", "Change Player", "Quit"])
+        match choice:
+            case "Retry":
+                # clearLastLine(22)
+                player.reset()
+                board.reset()
+                initBoard()
+                play()
+            case "Change Player":
+                player.reset()
+                board.reset()
+                exec()
+            case "Quit":
+                print("")
+                fauxType( f"Thanks for playing { player.name }!" )
+                print("")
+                break
+            case None:
+                clearLastLine(10)
 
-# move method out of class
 # check if name is Joe
 # launch secret game
-# showing loser when finding joe on last chance
