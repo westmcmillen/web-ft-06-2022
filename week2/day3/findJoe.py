@@ -1,35 +1,54 @@
 import time
 import random
 
-rows = ["A", "B", "C", "D", "E"]
-columns = ["1", "2", "3", "4", "5", ]
-coordinates = []
-board = f"""\033[A
-[ * ] [ 1 ] [ 2 ] [ 3 ] [ 4 ] [ 5 ]
-[ A ] [   ] [   ] [   ] [   ] [   ]
-[ B ] [   ] [   ] [   ] [   ] [   ]
-[ C ] [   ] [   ] [   ] [   ] [   ]
-[ D ] [   ] [   ] [   ] [   ] [   ]
-[ E ] [   ] [   ] [   ] [   ] [   ]
-\033[A"""
-emptyLocations = []
-joeLocations = []
-rayleighLocations = []
-
 class Player:
-    def __init__(self):
+    def __init__( self ):
         self.name = ""
         self.difficulty = ""
         self.score = 0
         self.chances = 5
         self.guesses = []
-    def incrementChances(self):
+    
+    # move out of class
+    def handleChoice( self, array ):
+        choice = input( "» " ).lower().capitalize()
+        try:
+            choice = int( choice ) - 1
+            if choice >= 0 and choice < len( array ):
+                rePrintInput( array[ choice ] )
+                return array[ choice ]
+            else:
+                clearLastLine()
+                self.handleChoice( array )
+        except:
+            if choice in array:
+                rePrintInput( choice )
+                return choice
+            else:
+                clearLastLine()
+                self.handleChoice( array )
+    
+    # move out of class
+    def getChoice( self, array ):
+        printList( array )
+        print( "" )
+        choice = self.handleChoice( array )
+        return choice
+    
+    def incrementChances( self ):
         self.chances += 1
-    def decrementChances(self):
+    
+    def decrementChances( self ):
         self.chances -= 1
-    def appendGuesses(self, guess):
-        self.guesses.append(guess)
-    def __str__(self):
+    
+    def appendGuesses( self, guess ):
+        self.guesses.append( guess )
+    
+    def reset( self ):
+        self.chances = 5
+        self.guesses = []
+    
+    def __str__( self ):
         return f"""
 Name: { self.name }
 Difficulty: { self.difficulty }
@@ -37,6 +56,67 @@ Score: { self.score }
 Chances: { self.chances }
 Guesses: { self.guesses }
         """
+
+player = Player()
+
+class Board:
+    def __init__(self):
+        self.template = f"""\033[A
+[ * ] [ 1 ] [ 2 ] [ 3 ] [ 4 ] [ 5 ]
+[ A ] [   ] [   ] [   ] [   ] [   ]
+[ B ] [   ] [   ] [   ] [   ] [   ]
+[ C ] [   ] [   ] [   ] [   ] [   ]
+[ D ] [   ] [   ] [   ] [   ] [   ]
+[ E ] [   ] [   ] [   ] [   ] [   ]
+\033[A"""
+        self.rows = ["A", "B", "C", "D", "E"]
+        self.columns = ["1", "2", "3", "4", "5", ]
+        self.coordinates = []
+        self.roomList = []
+        self.joeRooms = []
+        self.rayleighRooms = []
+    
+    def getCoordinates(self):
+        for self.row in self.rows:
+            for self.column in self.columns:
+                self.coordinates.append( f"{ self.row }{ self.column }" )
+    
+    def getRoomList(self):
+        for self.row in self.rows:
+            for self.column in self.columns:
+                self.roomList.append( f"{ self.row }{ self.column }" )
+    
+    def setRooms(self, difficulty):
+        match difficulty:
+            case "Easy":
+                for i in range( 5 ):
+                    self.joeRooms.append( self.roomList.pop( random.randint( 0, len( self.roomList ) - 1 ) ) )
+            case "Normal":
+                for i in range( 3 ):
+                    self.joeRooms.append( self.roomList.pop( random.randint( 0, len( self.roomList ) - 1) ) )
+            case "Hard":
+                self.joeRooms.append( self.roomList.pop( random.randint( 0, len( self.roomList ) - 1 ) ) )
+        self.rayleighRooms.append( self.roomList.pop( random.randint( 0, len( self.roomList ) - 1 ) ) )
+    
+    def setTemplate(self, string):
+        self.template = string
+
+    def reset(self):
+        self.template = f"""\033[A
+[ * ] [ 1 ] [ 2 ] [ 3 ] [ 4 ] [ 5 ]
+[ A ] [   ] [   ] [   ] [   ] [   ]
+[ B ] [   ] [   ] [   ] [   ] [   ]
+[ C ] [   ] [   ] [   ] [   ] [   ]
+[ D ] [   ] [   ] [   ] [   ] [   ]
+[ E ] [   ] [   ] [   ] [   ] [   ]
+\033[A"""
+        self.roomList = []
+        self.joeRooms = []
+        self.rayleighRooms = []
+    def __str__(self):
+        return f"{ self.template }"
+
+board = Board()
 
 def fauxType( string ):
     for char in string:
@@ -55,29 +135,57 @@ def rePrintInput( value ):
     clearLastLine()
     print( f"» { value }" )
 
-def handlePlayerChoice( array ):
-    playerChoice = input( "» " ).lower().capitalize()
-    try:
-        playerChoice = int( playerChoice ) - 1
-        if playerChoice >= 0 and playerChoice < len( array ):
-            rePrintInput( array[ playerChoice ] )
-            return array[ playerChoice ]
-        else:
-            clearLastLine()
-            handlePlayerChoice( array )
-    except:
-        if playerChoice in array:
-            rePrintInput( playerChoice )
-            return playerChoice
-        else:
-            clearLastLine()
-            handlePlayerChoice( array )
+def handleGuess():
+    guess = input( "» " ).upper()
+    if guess in board.coordinates or guess[ ::-1 ] in board.coordinates:
+        player.appendGuesses( guess )
+        if guess in board.joeRooms:
+            setTemplate( guess, "J" )
+            return guess
+        if guess in board.rayleighRooms:
+            setTemplate( guess, "R" )
+            return guess
+        setTemplate( guess, "X" )
+        return guess
+    else:
+        clearLastLine()
+        getGuess()
 
-def getPlayerChoice( array ):
-    printList( array )
-    print( "" )
-    playerChoice = handlePlayerChoice( array )
-    return playerChoice
+def getGuess():
+    guess = handleGuess()
+    rePrintInput( guess )
+    return guess
+
+def setTemplate( guess, char = "X" ):
+    spreadBoard = [ *board.template ]
+    try:
+        if int( guess[ 0 ] ):
+            guess = guess[ ::-1 ]
+    except:
+        pass
+    finally:
+        for row in board.rows:
+            match guess[ 0 ]:
+                case row:
+                    spreadBoard[ 48 + ( board.rows.index( guess[ 0 ] ) * 36 ) + ( board.columns.index( guess[ 1 ] ) * 6 ) ] = char
+    board.setTemplate("".join(spreadBoard))
+
+def initBoard():
+    board.getCoordinates()
+    board.getRoomList()
+    board.setRooms(player.difficulty)
+
+def printIntro():
+    print("")
+    print("\033[0;31m", end = "", flush = True)
+    fauxType("Welcome to findJoe.py")
+    print("\033[0;37m", end = "", flush = True)
+    print("")
+    print("\033[2;37m", end = "", flush = True)
+    print("\033[3;37m", end = "", flush = True)
+    fauxType("Oh, no! Our instructor Joe has gone missing...")
+    fauxType("Will you help find him?")
+    print("\033[0;37m", end = "", flush = True)
 
 def initSettings():
     print( "" )
@@ -98,29 +206,14 @@ def initSettings():
     fauxType( "Select Difficulty:" )
     print( "\033[0;37m", end = "", flush = True )
     print( "" )
-    player.difficulty = getPlayerChoice(["Easy", "Normal", "Hard"] )
+    player.difficulty = player.getChoice(["Easy", "Normal", "Hard"] )
     print( "" )
     print( "\033[2;37m", end = "", flush = True )
     print( "\033[3;37m", end = "", flush = True )
     fauxType( f"{ player.name }, you have selected { player.difficulty }. Do you wish to continue?" )
     print( "\033[0;37m", end = "", flush = True )
     print( "" )
-    # Initialize the golbal variables
-    for row in rows:
-        for column in columns:
-            coordinates.append( f"{ row }{ column }" )
-            emptyLocations.append( f"{ row }{ column }" )
-    match player.difficulty:
-        case "Easy":
-            for i in range( 5 ):
-                joeLocations.append( emptyLocations.pop( random.randint( 0, len( emptyLocations ) - 1 ) ) )
-        case "Normal":
-            for i in range( 3 ):
-                joeLocations.append( emptyLocations.pop( random.randint( 0, len( emptyLocations ) - 1) ) )
-        case "Hard":
-            joeLocations.append( emptyLocations.pop( random.randint( 0, len( emptyLocations ) - 1 ) ) )
-    rayleighLocations.append( emptyLocations.pop( random.randint( 0, len( emptyLocations ) - 1 ) ) )
-    playerChoice = getPlayerChoice( [ "Continue", "Back" ] )
+    playerChoice = player.getChoice( [ "Continue", "Back" ] )
     if playerChoice == "Back":
         initSettings()
 
@@ -138,88 +231,60 @@ def printDirections():
     print( "Example: A1, B2, Etc" )
     print( "\033[0;37m", end = "", flush = True )
 
-def appendSpreadBoard( spreadBoard, playerGuess, char = "X" ):
-    try:
-        if int( playerGuess[ 0 ] ):
-            playerGuess = playerGuess[ ::-1 ]
-    except:
-        pass
-    finally:
-        for row in rows:
-            match playerGuess[ 0 ]:
-                case row:
-                    spreadBoard[ 48 + ( rows.index( playerGuess[ 0 ] ) * 36 ) + ( columns.index( playerGuess[ 1 ] ) * 6 ) ] = char
-
-def handlePlayerGuess( spreadBoard, playerGuess ):
-    if playerGuess in coordinates or playerGuess[ ::-1 ] in coordinates:
-        player.appendGuesses( playerGuess )
-        if playerGuess in joeLocations:
-            appendSpreadBoard( spreadBoard, playerGuess, "J" )
-            return playerGuess
-        if playerGuess in rayleighLocations:
-            appendSpreadBoard( spreadBoard, playerGuess, "R" )
-            return playerGuess
-        appendSpreadBoard( spreadBoard, playerGuess, "X" )
-    else:
-        clearLastLine()
-        getPlayerGuess()
-
-def getPlayerGuess(spreadBoard):
-    playerGuess = input( "» " ).upper()
-    rePrintInput( playerGuess )
-    playerGuess = handlePlayerGuess( spreadBoard, playerGuess )
-    return playerGuess
-
-def playerFoundJoe():
-    pass 
-
-def playerFoundRayleigh():
-    pass 
-
-def getFeedback():
-    pass
-
-def printGUI(board):
-    print( "\033[0;31m", end = "", flush = True )
-    print( f"{ player.name }, you have { player.chances } remaining" )
+def printGUI():
+    print("")
+    print( "\033[0;33m", end = "", flush = True )
+    print( f"{ player.name }, you have { player.chances } chances remaining" )
     print( "\033[0;37m", end = "", flush = True )
     print("")
     print( board )
+    print("")
 
 def clearGUI():
-    for i in range( 10 ):
+    for i in range( 11 ):
         clearLastLine()
 
-def play(board):
-    print( "" )
+def play():
     while player.chances > 0:
-        printGUI(board)
-        spreadBoard = [ *board ]
-        print( "" )
-        playerGuess = getPlayerGuess(spreadBoard)
+        printGUI()
+        print("")
+        clearLastLine()
+        guess = getGuess()
         player.decrementChances()
-        board = "".join(spreadBoard)
         clearGUI()
-    print( "" )
-    playerChoice = getPlayerChoice( [ "Play Again", "New Player", "Quit" ] )
-    match playerChoice:
-        case "Play Again":
-            play.chances = 5
-            play(board)
-        case "New Player":
-            play.chances = 5
-            exec(board)
-        case "Quit":
-            fauxType( f"Thanks for playing, { player.name }!" )
+        if guess in board.joeRooms:
+            break
+        if guess in board.rayleighRooms:
+            player.incrementChances()
 
-def exec(board):
+def exec():
+    printIntro()
     initSettings()
-    print( "Joe's Locations", joeLocations )
-    print( "Rayleigh's Location", rayleighLocations )
+    initBoard()
     printDirections()
-    play(board)
+    play()
 
-player = Player()
+exec()
+clearLastLine()
 
-exec(board)
+while True:
+    choice = player.getChoice(["Retry", "Change Player", "Quit"])
+    match choice:
+        case "Retry":
+            player.reset()
+            board.reset()
+            initBoard()
+            for i in range(6):
+                clearLastLine()
+            play()
+        case "Change Player":
+            player.reset()
+            board.reset()
+            exec()
+        case "Quit":
+            print("")
+            fauxType( f"Thanks for playing { player.name }" )
+            break
 
+
+# Figure out clearing lines for play again sequence and message from previous game and example line of directions
