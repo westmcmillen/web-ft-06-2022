@@ -1,15 +1,16 @@
 import time
+import sys
 
 class Instrctor:
     def __init__(self):
         self.responses = [
             "That's one way of doing it...",
-            "There is some truthiness in there"
+            "There is some truthiness to that..."
         ]
     def reset(self):
         self.responses = [
             "That's one way of doing it...",
-            "There is some truthiness in there"
+            "There is some truthiness to that..."
         ]
 
 joe = Instrctor()
@@ -137,8 +138,8 @@ while True:
     print("\033[2;37m", end = "", flush = True)
     fauxType("""
     def getFactorial(n):
-    if n == 0: return 1
-    return n * getFactorialn(n - 1)
+        if n == 0: return 1
+        return n * getFactorialn(n - 1)
     """)
     print("\033[0;37m", end = "", flush = True)
     print("\033[1;37m", end = "", flush = True)
@@ -182,9 +183,12 @@ while True:
     """)
     print("\033[0;37m", end = "", flush = True)
 
-    choice = getChoice(["Play Again", "Quit"])
+    choice = getChoice(["Play Again", "New Game", "Quit"])
     if choice == "Quit":
         break
+    if choice == "New Game":
+        exec(open("findJoe.py").read())
+        sys.exit()
     joe.reset()
 
 print("")

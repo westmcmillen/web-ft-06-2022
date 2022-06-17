@@ -4,9 +4,6 @@ import sys
 
 # Latest Version
 
-class Break(Exception):
-    pass
-
 class Player:
     def __init__( self ):
         self.name = ""
@@ -98,6 +95,9 @@ class Board:
         return f"{ self.template }"
 
 board = Board()
+
+class Break(Exception):
+    pass
 
 def fauxType( string ):
     for char in string:
@@ -309,6 +309,7 @@ while True:
         choice = getChoice(["Retry", "Change Player", "Quit"])
         match choice:
             case "Retry":
+                clearLastLine( 22 )
                 player.reset()
                 board.reset()
                 initBoard()
@@ -324,6 +325,3 @@ while True:
                 break
             case None:
                 clearLastLine(10)
-
-# check if name is Joe
-# launch secret game
