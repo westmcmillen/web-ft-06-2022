@@ -38,7 +38,7 @@ Status: { self.status }
 player = Player()
 
 class Board:
-    def __init__(self):
+    def __init__( self ):
         self.template = f"""\033[A
 [ * ] [ 1 ] [ 2 ] [ 3 ] [ 4 ] [ 5 ]
 [ A ] [   ] [   ] [   ] [   ] [   ]
@@ -47,24 +47,24 @@ class Board:
 [ D ] [   ] [   ] [   ] [   ] [   ]
 [ E ] [   ] [   ] [   ] [   ] [   ]
 \033[A"""
-        self.rows = ["A", "B", "C", "D", "E"]
-        self.columns = ["1", "2", "3", "4", "5", ]
+        self.rows = [ "A", "B", "C", "D", "E"]
+        self.columns = [ "1", "2", "3", "4", "5", ]
         self.coordinates = []
         self.roomList = []
         self.joeRooms = []
         self.rayleighRooms = []
     
-    def getCoordinates(self):
+    def getCoordinates( self ):
         for row in self.rows:
             for column in self.columns:
                 self.coordinates.append( f"{ row }{ column }" )
     
-    def getRoomList(self):
+    def getRoomList( self ):
         for row in self.rows:
             for column in self.columns:
                 self.roomList.append( f"{ row }{ column }" )
     
-    def setRooms(self, difficulty):
+    def setRooms( self, difficulty ):
         match difficulty:
             case "Easy":
                 for i in range( 5 ):
@@ -76,10 +76,10 @@ class Board:
                 self.joeRooms.append( self.roomList.pop( random.randint( 0, len( self.roomList ) - 1 ) ) )
         self.rayleighRooms.append( self.roomList.pop( random.randint( 0, len( self.roomList ) - 1 ) ) )
     
-    def setTemplate(self, string):
+    def setTemplate( self, string ):
         self.template = string
 
-    def reset(self):
+    def reset( self ):
         self.template = f"""\033[A
 [ * ] [ 1 ] [ 2 ] [ 3 ] [ 4 ] [ 5 ]
 [ A ] [   ] [   ] [   ] [   ] [   ]
@@ -91,18 +91,18 @@ class Board:
         self.roomList = []
         self.joeRooms = []
         self.rayleighRooms = []
-    def __str__(self):
+    def __str__( self ):
         return f"{ self.template }"
 
 board = Board()
 
-class Break(Exception):
+class Break( Exception ):
     pass
 
 def fauxType( string ):
     for char in string:
-        print(char, end = "", flush = True)
-        time.sleep(0.025)
+        print( char, end = "", flush = True )
+        time.sleep( 0.025 )
     print( "" )
 
 def printList( array ):
@@ -178,24 +178,24 @@ def setTemplate( guess, char = "X" ):
             match guess[ 0 ]:
                 case row:
                     spreadBoard[ 48 + ( board.rows.index( guess[ 0 ] ) * 36 ) + ( board.columns.index( guess[ 1 ] ) * 6 ) ] = char
-    board.setTemplate("".join(spreadBoard))
+    board.setTemplate( "".join( spreadBoard ) )
 
 def initBoard():
     board.getCoordinates()
     board.getRoomList()
-    board.setRooms(player.difficulty)
+    board.setRooms( player.difficulty )
 
 def printIntro():
-    print("")
-    print("\033[0;31m", end = "", flush = True)
+    print( "" )
+    print( "\033[0;31m", end = "", flush = True )
     fauxType("Welcome to findJoe.py")
-    print("\033[0;37m", end = "", flush = True)
-    print("")
-    print("\033[2;37m", end = "", flush = True)
-    print("\033[3;37m", end = "", flush = True)
-    fauxType("Oh, no! Our instructor Joe has gone missing...")
-    fauxType("Will you help find him?")
-    print("\033[0;37m", end = "", flush = True)
+    print( "\033[0;37m", end = "", flush = True )
+    print( "" )
+    print( "\033[2;37m", end = "", flush = True )
+    print( "\033[3;37m", end = "", flush = True )
+    fauxType( "Oh, no! Our instructor Joe has gone missing..." )
+    fauxType( "Will you help find him?" )
+    print( "\033[0;37m", end = "", flush = True )
 
 def initSettings():
     print( "" )
@@ -207,7 +207,7 @@ def initSettings():
     player.name = input( "» " ).lower( ).capitalize( )
     rePrintInput( player.name )
     if player.name == "Joe":
-        exec(open("instructor.py").read())
+        exec( open( "instructor.py" ).read() )
         sys.exit()
     print( "" )
     print( "\033[2;37m", end = "", flush = True )
@@ -219,7 +219,7 @@ def initSettings():
     fauxType( "Select Difficulty:" )
     print( "\033[0;37m", end = "", flush = True )
     print( "" )
-    player.difficulty = getChoice(["Easy", "Normal", "Hard"] )
+    player.difficulty = getChoice( [ "Easy", "Normal", "Hard"] )
     print( "" )
     print( "\033[2;37m", end = "", flush = True )
     print( "\033[3;37m", end = "", flush = True )
@@ -245,17 +245,17 @@ def printDirections():
     print( "\033[0;37m", end = "", flush = True )
 
 def printGUI():
-    print("")
+    print( "" )
     print( "\033[0;33m", end = "", flush = True )
     print( f"{ player.name }, you have { player.chances } chances remaining" )
     print( "\033[0;37m", end = "", flush = True )
-    print("")
+    print( "" )
     print( board )
-    print("")
+    print( "" )
     if player.guesses:
-        if player.guesses[-1] in board.joeRooms:
+        if player.guesses[ -1 ] in board.joeRooms:
             print( f"Congratulations { player.name }! You found Joe!" )
-        elif player.guesses[-1] in board.rayleighRooms:
+        elif player.guesses[ -1 ] in board.rayleighRooms:
             print( f"Nice! You found Rayleigh! Bonus [+1] chance added" )
         else:
             if player.chances > 0:
@@ -266,13 +266,13 @@ def printGUI():
     else:
         print( f"Hint: Enter a coordinate" )
 
-    print("")
+    print( "" )
 
 def play():
     while player.chances > 0:
         printGUI()
-        print("\n\n\n")
-        clearLastLine(4)
+        print( "\n\n\n" )
+        clearLastLine( 4 )
         guess = getGuess()
         clearLastLine( 13 )
         try:
@@ -304,9 +304,9 @@ def newGame():
 newGame()
 
 while True:
-    clearLastLine(1)
+    clearLastLine( 1 )
     print( player )
-    choice = getChoice(["Retry", "Change Player", "Quit"])
+    choice = getChoice( [ "Retry", "Change Player", "Quit" ] )
     match choice:
         case "Retry":
             clearLastLine( 22 )
@@ -319,9 +319,9 @@ while True:
             board.reset()
             newGame()
         case "Quit":
-            print("")
+            print( "" )
             fauxType( f"Thanks for playing { player.name }!" )
-            print("")
+            print( "" )
             break
         case None:
-            clearLastLine(10)
+            clearLastLine( 10 )
