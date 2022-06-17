@@ -55,14 +55,14 @@ class Board:
         self.rayleighRooms = []
     
     def getCoordinates(self):
-        for self.row in self.rows:
-            for self.column in self.columns:
-                self.coordinates.append( f"{ self.row }{ self.column }" )
+        for row in self.rows:
+            for column in self.columns:
+                self.coordinates.append( f"{ row }{ column }" )
     
     def getRoomList(self):
-        for self.row in self.rows:
-            for self.column in self.columns:
-                self.roomList.append( f"{ self.row }{ self.column }" )
+        for row in self.rows:
+            for column in self.columns:
+                self.roomList.append( f"{ row }{ column }" )
     
     def setRooms(self, difficulty):
         match difficulty:
@@ -304,24 +304,24 @@ def newGame():
 newGame()
 
 while True:
-        clearLastLine(1)
-        print( player )
-        choice = getChoice(["Retry", "Change Player", "Quit"])
-        match choice:
-            case "Retry":
-                clearLastLine( 22 )
-                player.reset()
-                board.reset()
-                initBoard()
-                play()
-            case "Change Player":
-                player.reset()
-                board.reset()
-                newGame()
-            case "Quit":
-                print("")
-                fauxType( f"Thanks for playing { player.name }!" )
-                print("")
-                break
-            case None:
-                clearLastLine(10)
+    clearLastLine(1)
+    print( player )
+    choice = getChoice(["Retry", "Change Player", "Quit"])
+    match choice:
+        case "Retry":
+            clearLastLine( 22 )
+            player.reset()
+            board.reset()
+            initBoard()
+            play()
+        case "Change Player":
+            player.reset()
+            board.reset()
+            newGame()
+        case "Quit":
+            print("")
+            fauxType( f"Thanks for playing { player.name }!" )
+            print("")
+            break
+        case None:
+            clearLastLine(10)

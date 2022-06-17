@@ -38,3 +38,7 @@ Windows Command Line:
 ```
 python3 findJoe.py
 ```
+
+### Blog
+---
+https://medium.com/@westmcmillen/a-simple-command-line-game-findjoe-py-63382978f0e7
