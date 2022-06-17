@@ -59,7 +59,7 @@
 
 import time
 
-playerName = ""
+playerName = "Joe"
 responses = [
   "You're awesome!",
   "Great job!",
@@ -78,9 +78,6 @@ def newLine():
 
 def welcome():
   fauxType("Welcome to instructor.py")
-  newLine()
-  fauxType("Enter your name: ")
-  playerName = input("").lower().capitalize()
   newLine()
   fauxType(f"Hi, {playerName}. You are the instructor of this cohort.")
   newLine()

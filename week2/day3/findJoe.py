@@ -1,5 +1,6 @@
 import time
 import random
+import sys
 
 # Latest Version
 
@@ -205,6 +206,9 @@ def initSettings():
     print( "" )
     player.name = input( "» " ).lower( ).capitalize( )
     rePrintInput( player.name )
+    if player.name == "Joe":
+        exec(open("instructor.py").read())
+        sys.exit()
     print( "" )
     print( "\033[2;37m", end = "", flush = True )
     print( "\033[3;37m", end = "", flush = True )
@@ -254,9 +258,13 @@ def printGUI():
         elif player.guesses[-1] in board.rayleighRooms:
             print( f"Nice! You found Rayleigh! Bonus [+1] chance added" )
         else:
-            print( f"Hmm... Joe isn't there. Try again!" )
+            if player.chances > 0:
+                print( f"Hmm... Joe isn't there. Try again!" )
+            else:
+                print("Bummer! You're all out of chances...")
+
     else:
-            print( f"Hint: Enter a coordinate" )
+        print( f"Hint: Enter a coordinate" )
 
     print("")
 
@@ -279,21 +287,21 @@ def play():
         except TypeError:
             pass
         player.decrementChances()
+    printGUI()
     for guess in player.guesses:
         if guess in board.joeRooms:
             player.status = "Winner"
         else:
             player.status = "Loser"
-    printGUI()
 
-def exec():
+def newGame():
     printIntro()
     initSettings()
     initBoard()
     printDirections()
     play()
 
-exec()
+newGame()
 
 while True:
         clearLastLine(1)
@@ -301,7 +309,6 @@ while True:
         choice = getChoice(["Retry", "Change Player", "Quit"])
         match choice:
             case "Retry":
-                # clearLastLine(22)
                 player.reset()
                 board.reset()
                 initBoard()
@@ -309,7 +316,7 @@ while True:
             case "Change Player":
                 player.reset()
                 board.reset()
-                exec()
+                newGame()
             case "Quit":
                 print("")
                 fauxType( f"Thanks for playing { player.name }!" )
