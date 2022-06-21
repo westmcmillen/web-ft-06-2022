@@ -178,3 +178,30 @@ button.menubar-item {
     background-color: #f8f8f8;
     border: thin solid black;
 }
+
+.interests {
+    margin-top: 2rem;
+    grid-column: 1 / span 2;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 0.25rem;
+    border: 0.25rem solid steelblue;
+}
+
+.interests h3 {
+    grid-column: 1 / span 2;
+    padding: 0.25rem 1rem;
+    background-color: steelblue;
+    color: white;
+}
+
+.interests h4 {
+    padding: 0.25rem;
+    background-color: lightsteelblue;
+    color: darkblue;
+}
+
+.interests p {
+    background-color: #b0c4de44;
+    padding: 0.25rem;
+}
