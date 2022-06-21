@@ -106,6 +106,7 @@ button.menubar-item {
     grid-column: 1 / span 2;
     color: black;
     padding: 1rem;
+    font-size: 1.25rem;
     font-weight: bold;
 }
 
@@ -165,7 +166,7 @@ button.menubar-item {
     color: white;
 }
 
-.contact p {
+.contact a {
     grid-column: auto / auto;
     grid-row: auto / span 1;
     padding: 0.25rem;
@@ -204,4 +205,18 @@ button.menubar-item {
 .interests p {
     background-color: #b0c4de44;
     padding: 0.25rem;
+}
+
+.status {
+    margin-top: 2rem;
+    grid-column: 1 / span 2;
+    border: 0.25rem solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.status h2 {
+    font-size: 2rem;
+    font-weight: bold;
 }
