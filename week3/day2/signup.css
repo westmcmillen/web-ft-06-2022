@@ -1,0 +1,102 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    font-family: sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: #131313;
+    text-decoration: none;
+    cursor: default;
+}
+
+body {
+    background-color: #EEEEEE;
+}
+
+.wrapper {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.signup-form {
+    width: 400px;
+    height: 500px;
+    padding: 2rem 0;
+    border-radius: 0.5rem;
+    background-color: rgba(65, 88, 208, 1);
+    background-image: linear-gradient(43deg, rgba(65, 88, 208, 1) 0%, rgba(200, 80, 192, 1) 46%, rgba(255, 205, 112, 1) 100%);
+}
+
+.signup-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 0 2rem;
+    background-color: #FFFFFF;
+}
+
+.signup-container h1 {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.25rem;
+    font-weight: 900;
+}
+
+.signup-field {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.signup-field input {
+    width: 100%;
+    padding: 1rem 0;
+    border-bottom: 0.125rem solid #131313;
+}
+
+.signup-field input::placeholder {
+    font-size: 0.75rem;
+    color: rgb(136, 136, 136);
+}
+
+.signup-field input:focus {
+    border-bottom: 0.125rem solid #4158D0;
+}
+
+.signup-container button {
+    padding: 0.75rem 2.5rem;
+    border-radius: 2rem;
+    background-color: #131313;
+    font-weight: 900;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.signup-container button:hover {
+    background-color: #4158D0;
+    background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+}
+
+.signup-container p {
+    font-size: 0.50rem;
+    color: rgb(136, 136, 136);
+}
+
+.signup-field p:hover {
+    color: red;
+    cursor: pointer;
+}
