@@ -1,0 +1,21 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 3px;
+    width: max-content;
+    background-color: black;
+
+}
+
+.board div {
+    width: 50px;
+    height: 50px;
+    background-color: white;
+}

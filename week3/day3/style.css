@@ -1,0 +1,67 @@
+h1 {
+  color: red;
+}
+
+@media screen and (max-width: 480px) {
+  .fruit-basket {
+    background-color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* grid-template-rows: repeat(2, 1fr, 3fr); */
+  }
+}
+
+@media screen and (min-width: 480px) {
+  .fruit-basket {
+  display: grid;
+  place-items: center;
+  gap: 20px 10px;
+  grid-template-areas:
+    "grid1 grid1 grid1"
+    "grid2 grid3 grid4"
+    "grid2 grid5 grid6";
+  /* "grid2 grid5 grid6"; */
+}
+}
+
+.grid-1 {
+  width: 100%;
+  height: auto;
+  background-color: #246012;
+  grid-area: grid1;
+}
+.grid-2 {
+  width: 100%;
+  height: 100%;
+  background-color: #721422;
+  grid-area: grid2;
+}
+.grid-3 {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 100%;
+  /* min-width: 70px; */
+  height: auto;
+  background-color: #628c56;
+  grid-area: grid3;
+}
+.grid-4 {
+  width: 100%;
+  height: auto;
+  background-color: #1e90ff;
+  grid-area: grid4;
+}
+.grid-5 {
+  width: 100%;
+  height: auto;
+  background-color: #05eefa;
+  grid-area: grid5;
+}
+.grid-6 {
+  width: 100%;
+  height: auto;
+  background-color: #7d7a00;
+  grid-area: grid6;
+}
