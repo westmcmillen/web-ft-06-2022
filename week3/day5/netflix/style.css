@@ -1,0 +1,178 @@
+* {
+    display: block;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-family: sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: hsl(0, 0%, 95%);
+    text-decoration: none;
+}
+
+html,
+body {
+    display: contents;
+}
+
+head,
+script {
+    display: none;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.wrapper {
+    position: fixed;
+    inset: 0;
+    background-color: hsl(0, 0%, 13%);
+    overflow-y: scroll;
+}
+
+.navbar {
+    position: absolute;
+    inset: 0;
+    height: 3rem;
+    background-color: hsl(0, 0%, 8%);
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    min-width: 500px;
+    max-width: 1080px;
+    height: 100%;
+    margin: auto;
+    padding: 1rem;
+    background-color: hsl(0, 0%, 8%);
+}
+
+.brand {
+    height: 1rem;
+}
+
+.navbar-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+}
+
+.navbar-group p {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+}
+
+.nav-btn {
+    padding: .5rem 1rem;
+    font-size: 0.75rem;
+    border: 0.125rem solid transparent;
+    cursor: pointer;
+}
+
+.nav-btn:nth-of-type(1) {
+    background-color: hsl(357, 92%, 47%);
+}
+
+.nav-btn:nth-of-type(2) {
+    border: 0.125rem solid hsl(0, 0%, 95%);
+}
+
+.main {
+    position: absolute;
+    inset: 0;
+    top: 3rem;
+}
+
+.main-container {
+    width: 100%;
+    min-width: 500px;
+    max-width: 1080px;
+    height: 100%;
+    margin: auto;
+    padding: 1rem;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.hero {
+    height: max-content;
+    padding: 1rem;
+}
+
+.hero h1 {
+    font-size: 2rem;
+}
+
+.hero p {
+    font-size: 0.75rem;
+}
+
+.section-title {
+    padding: .5rem;
+    font-size: .75rem;
+}
+
+.carousel {
+    display: flex;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    overflow-x: scroll;
+    gap: .5rem;
+}
+
+.slide {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: .5rem;
+    flex-shrink: 0;
+    width: 100%;
+}
+
+.image {
+    aspect-ratio: 4 / 3;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.movie-1 {
+    background-image: url(https://upload.wikimedia.org/wikipedia/en/4/4e/Loki_%28TV_series%29_logo.png);
+}
+
+.movie-2 {
+    background-image: url(https://www.tvinsider.com/wp-content/uploads/2020/12/the-office-key-art-nbc-peacock-1014x570.jpg
+
+);
+}
+
+.movie-3 {
+    background-image: url(https://bgr.com/wp-content/uploads/2021/02/Avatar-The-Last-Airbender.jpg?quality=70&strip=all&w=720&h=405&crop=1);
+}
+
+.movie-4 {
+    background-image: url(https://www.caltimes.org/wp-content/uploads/2018/10/HellsKitchen1-900x675.jpg
+
+);
+}
+
+.movie-5 {
+    background-image: url(https://cdn.akamai.steamstatic.com/steam/apps/678030/capsule_616x353.jpg?t=1611617779);
+}
+
+.movie-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: .75rem;
+}
