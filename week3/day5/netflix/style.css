@@ -133,7 +133,7 @@ script {
 
 .slide {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(5, minmax(150px, 1fr));
     gap: .5rem;
     flex-shrink: 0;
     width: 100%;
