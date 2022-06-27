@@ -26,7 +26,18 @@
 
 const reservations = [];
 
+const vipData = [
+    { vipStatus: 5, timeslot: "7:30pm" },
+    { vipStatus: 3, timeslot: "5:30pm" },
+    { vipStatus: 1, timeslot: "3:30pm" },
+    { vipStatus: 5, timeslot: "7:30pm" },
+];
+
 const makeAReservation = (vipStatus, timeslot) => {
     reservations.push({ vipStatus, timeslot });
     return reservations.sort((a, b) => b.vipStatus - a.vipStatus);
 };
+
+vipData.forEach(reservation => makeAReservation(reservation.vipStatus, reservation.timeslot));
+
+console.log(reservations);
