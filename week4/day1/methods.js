@@ -85,3 +85,26 @@ const someFunction = number => {
 };
 
 console.log(someFunction(-1));
+
+// const mul = (...arguments) => {
+//     let total = 1;
+//     if (arguments.length === 0) {
+//         return 0;
+//     }
+//     arguments.forEach(argument => (total *= argument));
+//     return total;
+// };
+
+// console.log("Mul", mul());
+// console.log("Mul", mul(2, 3, 4));
+// console.log("Mul", mul(4, 3, 4));
+
+const mul = x => {
+    return y => {
+        return z => {
+            return x * y * z;
+        };
+    };
+};
+
+console.log(mul(2)(3)(4));
