@@ -88,11 +88,16 @@ const addTask = () => {
     todoList.append(task.listItem);
 };
 
-userInput.onkeydown = e => {
-    if (e.target.value.length !== 0) {
-        submitBtn.classList.add("active");
+const toggleSubmitBtnDisabled = e => {
+    if (e.target.value.replaceAll(" ", "").length === 0) {
+        submitBtn.disabled = true;
+    } else {
+        submitBtn.disabled = false;
     }
 };
+
+userInput.onkeydown = e => toggleSubmitBtnDisabled(e);
+userInput.onkeyup = e => toggleSubmitBtnDisabled(e);
 
 submitBtn.onclick = e => {
     e.preventDefault();

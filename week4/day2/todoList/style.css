@@ -175,23 +175,14 @@ input::placeholder {
 .submit-btn {
     width: 25%;
     padding: 0.5rem;
-    background-color: hsla(205, 16%, 71%, 1);
+    background-color: hsla(203, 89%, 53%, 1);
     border-radius: 0.25rem;
     font-weight: 900;
-    color: hsla(205, 25%, 91%, 1);
+    color: hsla(0, 0%, 100%, 1);
     cursor: not-allowed;
 }
 
-.submit-btn:hover {
-    filter: brightness(0.97);
-}
-
-.submit-btn.active {
-    background-color: hsla(203, 89%, 53%, 1);
-    color: hsla(0, 0%, 100%, 1);
-}
-
-.submit-btn.active::before {
+.submit-btn::before {
     content: "";
     position: absolute;
     inset: 0;
@@ -199,4 +190,13 @@ input::placeholder {
     border-top-right-radius: 0.25rem;
     border-top-left-radius: 0.25rem;
     background-color: hsla(0, 0%, 100%, 0.13);
+}
+
+.submit-btn:hover {
+    filter: brightness(0.97);
+}
+
+.submit-btn:disabled {
+    background-color: hsla(205, 16%, 71%, 1);
+    color: hsla(205, 25%, 91%, 1);
 }
