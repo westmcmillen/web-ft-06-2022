@@ -84,7 +84,7 @@ const addTask = (id = null, userInput = null) => {
     const trashBtn = createTrashBtn();
 
     if (id) {
-        listItem.id = id;
+        listItem.id = getTaskIndex();
     }
 
     if (userInput) {
