@@ -158,9 +158,10 @@ li[data-complete="true"] .check-btn {
 
 input {
     width: 100%;
-    padding: 0.5rem;
+    padding: 1rem;
     border-radius: 0.25rem;
     border: 0.125rem solid hsla(205, 16%, 71%, 1);
+    font-size: 1.5rem;
     cursor: text;
 }
 

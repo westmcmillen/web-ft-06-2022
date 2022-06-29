@@ -2,21 +2,12 @@ const todoList = document.querySelector("ul");
 const userInput = document.querySelector("input");
 const submitBtn = document.querySelector(".submit-btn");
 
-const updateTaskIndex = () => {
-    for (let i = 0; i < todoList.childElementCount; i++) {
-        todoList.children[i].firstElementChild.innerText = `${i + 1}.`;
-    }
-};
-
 const createListItem = () => {
     const listItem = document.createElement("li");
+    listItem.dataset.id = localStorage.length;
     listItem.dataset.complete = "false";
-    listItem.onclick = e => {
-        switch (e.target.className) {
-            case "trash-btn":
-                listItem.remove();
-                updateTaskIndex();
-                break;
+    listItem.onclick = event => {
+        switch (event.target.className) {
             case "check-btn":
                 switch (listItem.dataset.complete) {
                     case "true":
@@ -24,6 +15,12 @@ const createListItem = () => {
                     case "false":
                         return (listItem.dataset.complete = "true");
                 }
+            case "trash-btn":
+                // console.log(event.currentTarget.dataset.id);
+                deleteTask(event.currentTarget.dataset.id);
+                listItem.remove();
+                updateTaskIndex();
+                break;
         }
     };
     return listItem;
@@ -70,38 +67,72 @@ const createCheckBtn = () => {
     return checkBtn;
 };
 
-const createTask = () => {
-    return {
-        listItem: createListItem(),
-        taskIndex: createTaskIndex(),
-        taskText: createTaskText(),
-        taskBtns: createTaskBtns(),
-        checkBtn: createCheckBtn(),
-        trashBtn: createTrashBtn(),
-    };
+const addTask = (userInput = null) => {
+    const listItem = createListItem();
+    const taskIndex = createTaskIndex();
+    const taskText = createTaskText();
+    const taskBtns = createTaskBtns();
+    const checkBtn = createCheckBtn();
+    const trashBtn = createTrashBtn();
+
+    if (userInput) {
+        taskText.innerText = userInput;
+    }
+
+    taskBtns.append(checkBtn, trashBtn);
+    listItem.append(taskIndex, taskText, taskBtns);
+    todoList.append(listItem);
 };
 
-const addTask = () => {
-    const task = createTask();
-    task.taskBtns.append(task.checkBtn, task.trashBtn);
-    task.listItem.append(task.taskIndex, task.taskText, task.taskBtns);
-    todoList.append(task.listItem);
-};
-
-const toggleSubmitBtnDisabled = e => {
-    if (e.target.value.replaceAll(" ", "").length === 0) {
-        submitBtn.disabled = true;
-    } else {
-        submitBtn.disabled = false;
+const updateTaskIndex = () => {
+    for (let i = 0; i < todoList.childElementCount; i++) {
+        todoList.children[i].dataset.index = i;
+        todoList.children[i].firstElementChild.innerText = `${i + 1}.`;
     }
 };
 
-userInput.onkeydown = e => toggleSubmitBtnDisabled(e);
-userInput.onkeyup = e => toggleSubmitBtnDisabled(e);
+const toggleSubmitBtnDisabled = () => {
+    switch (getUserInput().length) {
+        case 0:
+            submitBtn.disabled = true;
+            break;
+        default:
+            submitBtn.disabled = false;
+    }
+};
 
-submitBtn.onclick = e => {
-    e.preventDefault();
+const saveTask = id => {
+    localStorage.setItem(id, getUserInput());
+    // console.log(localStorage);
+};
+
+const deleteTask = id => {
+    localStorage.removeItem(id);
+    // console.log(localStorage);
+};
+
+for (let i = 0; i < localStorage.length; i++) {
+    addTask(localStorage[i]);
+    updateTaskIndex();
+}
+
+userInput.onkeyup = event => toggleSubmitBtnDisabled(event);
+
+submitBtn.onclick = event => {
+    event.preventDefault();
     addTask();
     updateTaskIndex();
+    const listItems = document.querySelectorAll("li");
+    saveTask(listItems[listItems.length - 1].dataset.id);
     clearUserInput();
+};
+
+// console.log(localStorage);
+// localStorage.clear();
+
+const header = document.querySelector("h1");
+header.onclick = () => {
+    const listItems = document.querySelectorAll("li");
+    listItems.forEach(listItem => listItem.remove());
+    localStorage.clear();
 };
