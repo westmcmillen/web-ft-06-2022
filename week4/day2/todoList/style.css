@@ -76,46 +76,71 @@ ul {
 
 li {
     flex-shrink: 0;
-    height: max-content;
-}
-
-p {
-    font-size: 1.5rem;
-    text-align: center;
-}
-
-.task-container {
     display: flex;
     justify-content: space-between;
+    height: max-content;
+    gap: 1rem;
     padding: 1rem;
     border-radius: 0.25rem;
     background-color: hsla(204, 33%, 97%, 1);
     border: 0.125rem solid hsla(205, 16%, 71%, 1);
 }
 
-.task-buttons {
+li[data-complete="true"] p {
+    text-decoration: line-through;
+}
+
+h2 {
+    width: max-content;
+    font-size: 1.5rem;
+    font-weight: 900;
+    text-align: center;
+}
+
+p {
+    width: 100%;
+    font-size: 1.5rem;
+}
+
+.task-btns {
     display: flex;
     gap: 1rem;
 }
 
-.trash {
-    width: 2rem;
-    height: 2rem;
-    background-image: url("./trash-can-solid.svg");
+.trash-btn {
+    width: 1.5rem;
+    height: 1.5rem;
+    background-image: url("./svg/circle-xmark-solid/circle-xmark-solid-grey.svg");
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
     cursor: pointer;
 }
 
-.check {
-    width: 2rem;
-    height: 2rem;
-    background-image: url("./circle-check-solid.svg");
+.trash-btn:hover {
+    background-image: url("./svg/circle-xmark-solid/circle-xmark-solid-red.svg");
+    filter: brightness(0.89);
+}
+
+.check-btn {
+    width: 1.5rem;
+    height: 1.5rem;
+    background-image: url("./svg/circle-check-solid/circle-check-solid-grey.svg");
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
     cursor: pointer;
+}
+
+.check-btn:hover {
+    background-image: url("./svg/circle-check-solid/circle-check-solid-red.svg");
+    filter: brightness(0.89);
+}
+
+li[data-complete="true"] .check-btn:hover,
+li[data-complete="true"] .check-btn {
+    background-image: url("./svg/circle-check-solid/circle-check-solid-red.svg");
+    filter: brightness(1);
 }
 
 .form {
@@ -143,26 +168,26 @@ input::placeholder {
     color: hsla(205, 16%, 71%, 1);
 }
 
-.submit {
+.submit-btn {
     width: 25%;
     padding: 0.5rem;
     background-color: hsla(205, 16%, 71%, 1);
     border-radius: 0.25rem;
     font-weight: 900;
     color: hsla(205, 25%, 91%, 1);
-    cursor: pointer;
+    cursor: not-allowed;
 }
 
-.submit:hover {
+.submit-btn:hover {
     filter: brightness(0.97);
 }
 
-.submit.active {
+.submit-btn.active {
     background-color: hsla(203, 89%, 53%, 1);
     color: hsla(0, 0%, 100%, 1);
 }
 
-.submit.active::before {
+.submit-btn.active::before {
     content: "";
     position: absolute;
     inset: 0;

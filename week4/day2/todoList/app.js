@@ -1,42 +1,87 @@
-const addTask = todo => {
-    const list = document.querySelector("ul");
+const todoList = document.querySelector("ul");
+const userInput = document.querySelector("input");
+const submitBtn = document.querySelector(".submit-btn");
+
+const createListItem = () => {
     const listItem = document.createElement("li");
-    const taskContainer = document.createElement("div");
-    taskContainer.classList.add("task-container");
-    const userInput = document.createElement("p");
-    userInput.innerText = todo;
-    const taskButtons = document.createElement("div");
-    taskButtons.classList.add("task-buttons");
-    const trash = document.createElement("button");
-    trash.classList.add("trash");
-    trash.onclick = e => {
-        e.target.parentElement.parentElement.parentElement.remove();
+    listItem.dataset.complete = "false";
+    listItem.onclick = e => {
+        switch (e.target.className) {
+            case "trash-btn":
+                return listItem.remove();
+            case "check-btn":
+                switch (listItem.dataset.complete) {
+                    case "true":
+                        return (listItem.dataset.complete = "false");
+                    case "false":
+                        return (listItem.dataset.complete = "true");
+                }
+        }
     };
-    const check = document.createElement("button");
-    check.classList.add("check");
-    check.onclick = e => {
-        e.target.parentElement.parentElement.firstElementChild.setAttribute("style", "text-decoration: line-through;");
-    };
-    list.append(listItem);
-    listItem.append(taskContainer);
-    taskContainer.append(userInput, taskButtons);
-    taskButtons.append(trash, check);
+    return listItem;
 };
 
-const deleteTask = () => {};
-
 const getUserInput = () => {
-    const userInput = document.querySelector("input");
     return userInput.value;
 };
 
 const clearUserInput = () => {
-    const userInput = document.querySelector("input");
     userInput.value = "";
 };
 
-const submit = document.querySelector(".submit");
-submit.onclick = () => {
-    addTask(getUserInput());
+const getTaskIndex = () => {
+    return todoList.childElementCount + 1;
+};
+
+const createTaskIndex = () => {
+    const taskIndex = document.createElement("h2");
+    taskIndex.innerText = `${getTaskIndex()}.`;
+    return taskIndex;
+};
+
+const createTaskText = () => {
+    const taskText = document.createElement("p");
+    taskText.innerText = getUserInput();
+    return taskText;
+};
+
+const createTaskBtns = () => {
+    const taskBtns = document.createElement("div");
+    taskBtns.classList.add("task-btns");
+    return taskBtns;
+};
+
+const createTrashBtn = () => {
+    const trashBtn = document.createElement("button");
+    trashBtn.classList.add("trash-btn");
+    return trashBtn;
+};
+
+const createCheckBtn = () => {
+    const checkBtn = document.createElement("button");
+    checkBtn.classList.add("check-btn");
+    return checkBtn;
+};
+
+const createTask = () => {
+    return {
+        listItem: createListItem(),
+        taskIndex: createTaskIndex(),
+        taskText: createTaskText(),
+        taskBtns: createTaskBtns(),
+        checkBtn: createCheckBtn(),
+        trashBtn: createTrashBtn(),
+    };
+};
+
+const addTask = () => {
+    const task = createTask();
+    task.taskBtns.append(task.checkBtn, task.trashBtn);
+    task.listItem.append(task.taskIndex, task.taskText, task.taskBtns);
+    todoList.append(task.listItem);
+};
+
+submitBtn.onclick = () => {
+    addTask();
     clearUserInput();
 };
