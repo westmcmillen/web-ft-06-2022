@@ -4,7 +4,7 @@ const submitBtn = document.querySelector(".submit-btn");
 
 const createListItem = () => {
     const listItem = document.createElement("li");
-    listItem.dataset.id = localStorage.length;
+    listItem.id = new Date().getTime();
     listItem.dataset.complete = "false";
     listItem.onclick = event => {
         switch (event.target.className) {
@@ -16,11 +16,19 @@ const createListItem = () => {
                         return (listItem.dataset.complete = "true");
                 }
             case "trash-btn":
-                // console.log(event.currentTarget.dataset.id);
-                deleteTask(event.currentTarget.dataset.id);
+                // console.log(event.currentTarget.id);
+                deleteTask(event.currentTarget.id);
                 listItem.remove();
                 updateTaskIndex();
                 break;
+        }
+    };
+    listItem.ondblclick = () => {
+        switch (listItem.dataset.complete) {
+            case "true":
+                return (listItem.dataset.complete = "false");
+            case "false":
+                return (listItem.dataset.complete = "true");
         }
     };
     return listItem;
@@ -67,13 +75,17 @@ const createCheckBtn = () => {
     return checkBtn;
 };
 
-const addTask = (userInput = null) => {
+const addTask = (id = null, userInput = null) => {
     const listItem = createListItem();
     const taskIndex = createTaskIndex();
     const taskText = createTaskText();
     const taskBtns = createTaskBtns();
     const checkBtn = createCheckBtn();
     const trashBtn = createTrashBtn();
+
+    if (id) {
+        listItem.id = id;
+    }
 
     if (userInput) {
         taskText.innerText = userInput;
@@ -103,16 +115,18 @@ const toggleSubmitBtnDisabled = () => {
 
 const saveTask = id => {
     localStorage.setItem(id, getUserInput());
-    // console.log(localStorage);
+    console.log(localStorage);
 };
 
 const deleteTask = id => {
     localStorage.removeItem(id);
-    // console.log(localStorage);
+    console.log(localStorage);
 };
 
-for (let i = 0; i < localStorage.length; i++) {
-    addTask(localStorage[i]);
+// Add Tasks From Local Storage
+for (let [id, userInput] of Object.entries(localStorage)) {
+    console.log(id, userInput);
+    addTask(id, userInput);
     updateTaskIndex();
 }
 
@@ -123,13 +137,13 @@ submitBtn.onclick = event => {
     addTask();
     updateTaskIndex();
     const listItems = document.querySelectorAll("li");
-    saveTask(listItems[listItems.length - 1].dataset.id);
+    saveTask(listItems[listItems.length - 1].id);
     clearUserInput();
 };
 
-// console.log(localStorage);
-// localStorage.clear();
+console.log(localStorage);
 
+// Clear Local Storage
 const header = document.querySelector("h1");
 header.onclick = () => {
     const listItems = document.querySelectorAll("li");

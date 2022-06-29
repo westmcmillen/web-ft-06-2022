@@ -137,7 +137,7 @@ p {
 }
 
 .check-btn:hover {
-    background-image: url("./svg/circle-check-solid/circle-check-solid-green.svg");
+    /* background-image: url("./svg/circle-check-solid/circle-check-solid-green.svg"); */
     filter: brightness(0.89);
 }
 
