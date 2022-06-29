@@ -119,7 +119,6 @@ p {
 
 .trash-btn:hover {
     background-image: url("./svg/circle-xmark-solid/circle-xmark-solid-red.svg");
-    filter: brightness(0.89);
 }
 
 .check-btn {
@@ -133,13 +132,13 @@ p {
 }
 
 .check-btn:hover {
-    background-image: url("./svg/circle-check-solid/circle-check-solid-red.svg");
+    background-image: url("./svg/circle-check-solid/circle-check-solid-green.svg");
     filter: brightness(0.89);
 }
 
 li[data-complete="true"] .check-btn:hover,
 li[data-complete="true"] .check-btn {
-    background-image: url("./svg/circle-check-solid/circle-check-solid-red.svg");
+    background-image: url("./svg/circle-check-solid/circle-check-solid-green.svg");
     filter: brightness(1);
 }
 
