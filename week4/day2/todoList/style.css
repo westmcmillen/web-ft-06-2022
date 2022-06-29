@@ -86,6 +86,11 @@ li {
     border: 0.125rem solid hsla(205, 16%, 71%, 1);
 }
 
+li[data-complete="true"] {
+    border: 0.125rem solid hsla(146, 50%, 36%, 1);
+    background-color: hsla(146, 50%, 36%, 0.13);
+}
+
 li[data-complete="true"] p {
     text-decoration: line-through;
 }

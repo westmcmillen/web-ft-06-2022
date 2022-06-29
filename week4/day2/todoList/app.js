@@ -2,13 +2,21 @@ const todoList = document.querySelector("ul");
 const userInput = document.querySelector("input");
 const submitBtn = document.querySelector(".submit-btn");
 
+const updateTaskIndex = () => {
+    for (let i = 0; i < todoList.childElementCount; i++) {
+        todoList.children[i].firstElementChild.innerText = `${i + 1}.`;
+    }
+};
+
 const createListItem = () => {
     const listItem = document.createElement("li");
     listItem.dataset.complete = "false";
     listItem.onclick = e => {
         switch (e.target.className) {
             case "trash-btn":
-                return listItem.remove();
+                listItem.remove();
+                updateTaskIndex();
+                break;
             case "check-btn":
                 switch (listItem.dataset.complete) {
                     case "true":
@@ -35,7 +43,6 @@ const getTaskIndex = () => {
 
 const createTaskIndex = () => {
     const taskIndex = document.createElement("h2");
-    taskIndex.innerText = `${getTaskIndex()}.`;
     return taskIndex;
 };
 
@@ -81,7 +88,15 @@ const addTask = () => {
     todoList.append(task.listItem);
 };
 
-submitBtn.onclick = () => {
+userInput.onkeydown = e => {
+    if (e.target.value.length !== 0) {
+        submitBtn.classList.add("active");
+    }
+};
+
+submitBtn.onclick = e => {
+    e.preventDefault();
     addTask();
+    updateTaskIndex();
     clearUserInput();
 };
