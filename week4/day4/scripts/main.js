@@ -1,11 +1,18 @@
+const dealerHand = document.getElementById("dealer-hand");
+const playerHand = document.getElementById("player-hand");
+
+const dealerPoints = document.getElementById("dealer-points");
+const playerPoints = document.getElementById("player-points");
+
 const dealBtn = document.getElementById("deal-button");
 const hitBtn = document.getElementById("hit-button");
 const standBtn = document.getElementById("stand-button");
 
-const suits = ["heart", "diamond", "club", "spade"];
-const deck = [];
-const dealerCards = [];
-const playerCards = [];
+const suits = ["hearts", "diamonds", "clubs", "spades"];
+
+let deck = [];
+let dealerCards = [];
+let playerCards = [];
 
 const createCard = (suit, rank) => {
     return {
@@ -29,11 +36,15 @@ const getCard = () => {
 };
 
 const addPlayerCard = () => {
-    playerCards.push(getCard());
+    const card = getCard();
+    playerCards.push(card);
+    renderCard(card, playerHand);
 };
 
 const addDealerCard = () => {
-    dealerCards.push(getCard());
+    const card = getCard();
+    dealerCards.push(card);
+    renderCard(card, dealerHand);
 };
 
 const dealCards = () => {
@@ -43,27 +54,82 @@ const dealCards = () => {
     addDealerCard();
 };
 
-// const renderCards = () => {
-//   for ( let card of playerCards ) {
+const renderCard = (card, targetElement) => {
+    const img = document.createElement("img");
+    img.src = `./images/${card.rank}_of_${card.suit}.png`;
+    targetElement.append(img);
+};
 
-//   }
-// }
+const checkBust = (sum, targetCards) => {
+    if (sum > 21) {
+        for (let card of targetCards) {
+            if (card.rank === 1) {
+                sum -= 10;
+                console.log(sum);
+                return sum;
+            }
+        }
+    }
+    return sum;
+};
+
+const sumCards = targetCards => {
+    let sum = 0;
+    for (let card of targetCards) {
+        sum += card.value.primary;
+    }
+    return checkBust(sum, targetCards);
+};
+
+const renderDealerSums = () => {
+    const dealerCardSum = sumCards(dealerCards);
+    dealerPoints.innerText = null;
+    dealerPoints.append(dealerCardSum);
+};
+
+const renderPlayerSums = () => {
+    const playerCardSum = sumCards(playerCards);
+    playerPoints.innerText = null;
+    playerPoints.append(playerCardSum);
+};
+
+const initGame = () => {
+    deck = [];
+    dealerCards = [];
+    playerCards = [];
+    dealerPoints.innerText = null;
+    playerPoints.innerText = null;
+    dealerHand.innerHTML = null;
+    playerHand.innerHTML = null;
+    dealBtn.removeAttribute("disabled", "disabled");
+};
+
+const resetGame = () => {
+    setTimeout(initGame, 2000);
+    setTimeout(createDeck, 2000);
+};
 
 createDeck();
 
 dealBtn.onclick = () => {
+    dealBtn.setAttribute("disabled", "disabled");
     dealCards();
-    console.log(dealerCards);
-    console.log(playerCards);
+    renderDealerSums();
+    renderPlayerSums();
+    if (sumCards(dealerCards) >= 21) resetGame();
+    if (sumCards(playerCards) >= 21) resetGame();
 };
 
 hitBtn.onclick = () => {
     addPlayerCard();
-    console.log(playerCards);
+    renderPlayerSums();
+    if (sumCards(playerCards) >= 21) resetGame();
 };
 
-for (let i = 0; i < deck.length; i++) {
-    getCard();
-}
-
-console.log(deck);
+standBtn.onclick = () => {
+    while (sumCards(dealerCards) < 18) {
+        addDealerCard();
+        renderDealerSums();
+    }
+    resetGame();
+};
