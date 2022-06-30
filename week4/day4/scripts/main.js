@@ -61,16 +61,22 @@ const renderCard = (card, targetElement) => {
 };
 
 const checkBust = (sum, targetCards) => {
-    if (sum > 21) {
-        for (let card of targetCards) {
-            if (card.rank === 1) {
-                sum -= 10;
-                console.log(sum);
-                return sum;
+    switch (sum) {
+        case 21:
+            resetGame();
+            break;
+        default:
+            if (sum > 21) {
+                for (let card of targetCards) {
+                    if (card.rank === 1) {
+                        sum -= 10;
+                        return sum;
+                    }
+                }
+                resetGame();
             }
-        }
+            return sum;
     }
-    return sum;
 };
 
 const sumCards = targetCards => {
@@ -113,20 +119,19 @@ createDeck();
 
 dealBtn.onclick = () => {
     dealBtn.setAttribute("disabled", "disabled");
+    hitBtn.removeAttribute("disabled", "disabled");
     dealCards();
     renderDealerSums();
     renderPlayerSums();
-    if (sumCards(dealerCards) >= 21) resetGame();
-    if (sumCards(playerCards) >= 21) resetGame();
 };
 
 hitBtn.onclick = () => {
     addPlayerCard();
     renderPlayerSums();
-    if (sumCards(playerCards) >= 21) resetGame();
 };
 
 standBtn.onclick = () => {
+    hitBtn.setAttribute("disabled", "disabled");
     while (sumCards(dealerCards) < 18) {
         addDealerCard();
         renderDealerSums();
