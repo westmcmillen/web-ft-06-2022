@@ -60,14 +60,22 @@ const getSum = targetHand => {
     for (let card of targetHand) {
         sum += card.value;
     }
-    return checkSum(sum, targetHand);
+    return handleSum(sum, targetHand);
 };
 
-const checkSum = (sum, targetHand) => {
+// const handleAce = (sum, targetHand) => {};
+
+// Refactor
+// Seperate functions
+const handleSum = (sum, targetHand) => {
     if (sum <= 11) {
         for (let card of targetHand) {
             if (card.rank === 1) {
                 sum += 10;
+                if (sum === 21) {
+                    stopGame();
+                    return "Blackjack";
+                }
                 return sum;
             }
         }
@@ -114,14 +122,12 @@ const initGame = () => {
     setBtnEnable(dealBtn);
 };
 
-const toggleBtnDisable = target => {
+const toggleBtnEnable = target => {
     switch (target) {
         case dealBtn:
             setBtnDisable(dealBtn);
             setBtnEnable(hitBtn);
             setBtnEnable(standBtn);
-            break;
-        case hitBtn:
             break;
         case standBtn:
             setBtnDisable(hitBtn);
@@ -131,20 +137,19 @@ const toggleBtnDisable = target => {
 };
 
 dealBtn.onclick = ({ target }) => {
-    toggleBtnDisable(target);
+    toggleBtnEnable(target);
     createDeck();
     dealCards();
     setSums();
 };
 
-hitBtn.onclick = ({ target }) => {
-    toggleBtnDisable(target);
+hitBtn.onclick = () => {
     addPlayerCard();
     setSums();
 };
 
 standBtn.onclick = ({ target }) => {
-    toggleBtnDisable(target);
+    toggleBtnEnable(target);
     while (getSum(dealerCards) < 17) {
         addDealerCard();
         setSums();
