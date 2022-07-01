@@ -66,7 +66,6 @@ const getSum = targetHand => {
 // const handleAce = (sum, targetHand) => {};
 
 // Refactor
-// Seperate functions
 const handleSum = (sum, targetHand) => {
     if (sum <= 11) {
         for (let card of targetHand) {
@@ -109,6 +108,21 @@ const stopGame = () => {
     setBtnDisable(hitBtn);
     setBtnDisable(standBtn);
     setTimeout(initGame, 3000);
+};
+
+const setResults = () => {
+    const dealerSum = getSum(dealerCards);
+    const playerSum = getSum(playerCards);
+    if (playerSum <= 21 && playerSum > dealerSum) {
+        playerPoints.innerText = "Winner";
+    }
+    if (dealerSum <= 21 && dealerSum > playerSum) {
+        dealerPoints.innerText = "Winner";
+    }
+    if (dealerSum === playerSum) {
+        dealerPoints.innerText = "Draw";
+        playerPoints.innerText = "Draw";
+    }
 };
 
 const initGame = () => {
@@ -154,5 +168,6 @@ standBtn.onclick = ({ target }) => {
         addDealerCard();
         setSums();
     }
+    setResults();
     stopGame();
 };
