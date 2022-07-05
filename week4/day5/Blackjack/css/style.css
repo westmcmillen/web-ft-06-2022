@@ -141,34 +141,11 @@ h6 {
     height: 12rem;
     aspect-ratio: 2.45 / 3.5;
     background-position: center;
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
-    border-radius: 0.25rem;
+    border: thin solid hsla(0, 0%, 13%, 13%);
+    border-radius: 0.5rem;
 }
-
-/* .chip {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    aspect-ratio: 1 / 1;
-    width: calc((100% - 4.5rem) / 10);
-    background-color: hsla(0, 0%, 13%, 87%);
-    border-top: 0.125rem solid hsla(0, 0%, 100%, 34%);
-    border-bottom: 0.125rem solid hsla(0, 0%, 13%, 13%);
-    border-radius: 5rem;
-    font-weight: 900;
-    color: hsla(0, 0%, 100%, 100%);
-}
-
-.chip::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    height: 50%;
-    background-color: hsla(0, 0%, 100%, 8%);
-    border-top-right-radius: 5rem;
-    border-top-left-radius: 5rem;
-} */
 
 .chip {
     aspect-ratio: 1 / 1;

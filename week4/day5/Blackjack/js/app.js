@@ -116,12 +116,8 @@ const adjustSumCards = (sumCards, targetCards) => {
         cardHash[card.rank] = (cardHash[card.value] || 0) + 1;
     });
     if (1 in cardHash) {
-        let count = cardHash[1];
-        while (count > 0) {
-            if (sumCards + 10 <= 21) {
-                sumCards += 10;
-            }
-            count--;
+        if (sumCards + 10 <= 21) {
+            sumCards += 10;
         }
     }
     if (0 in cardHash) {
