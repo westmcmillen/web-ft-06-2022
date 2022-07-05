@@ -86,6 +86,10 @@ const addCard = (targetCards, targetHand) => {
     renderCardElement(card, targetHand);
     centerCardElements(targetHand);
     setCounter(card);
+    if (isLastCard()) {
+        createDeck();
+        initCounter();
+    }
 };
 
 // adds a hole card to the dealer's hand
@@ -337,7 +341,6 @@ hitButton.onclick = () => {
     addCard(playerCards, playerHand);
     renderTotals();
     renderCounter(counter);
-    if (isLastCard()) createDeck();
     if (getAdjustedSumCards(playerCards) > 21 || hasJoeker(playerCards)) {
         compareHands();
         setTimeout(() => clearTable(), 3000);
@@ -380,6 +383,7 @@ decrementButton.onclick = () => {
 };
 
 incrementButton.onclick = () => {
+    if (balance === 0) return;
     jumbotron.classList.remove("place-bet");
     createChip();
     renderChipElement();
