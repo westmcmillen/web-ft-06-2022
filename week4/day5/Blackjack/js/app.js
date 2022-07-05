@@ -408,5 +408,5 @@ document.getElementById("app-header").ondblclick = () => {
     setCounter(card);
     addHoleCard();
     compareHands();
-    setTimeout(() => clearTable(), 3000);
+    setTimeout(() => clearTable(), 5000);
 };
