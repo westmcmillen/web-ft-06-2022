@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Blackjack</title>
+        <link defer rel="stylesheet" href="./css/style.css" />
+        <script defer src="./js/app.js"></script>
+    </head>
+    <body>
+        <div id="app-root">
+            <div id="app-container" class="container">
+                <div id="app-header">
+                    <h1>Blackjack</h1>
+                </div>
+                <div id="app-dealer" class="competitor">
+                    <div id="dealer-total" class="hand-total"></div>
+                    <div id="dealer-hand" class="hand"></div>
+                </div>
+                <div id="app-player" class="competitor">
+                    <div id="player-total" class="hand-total"></div>
+                    <div id="player-hand" class="hand"></div>
+                </div>
+                <div id="app-ui">
+                    <button id="stand-button">Stand</button>
+                    <button id="hit-button">Hit</button>
+                    <button id="deal-button">Deal</button>
+                    <div id="ui-bookie">
+                        <button id="decrement-button">
+                            <img src="./img/dollar-sign-solid.svg" alt="$" />
+                        </button>
+                        <div id="jumbotron" class="place-bet"></div>
+                        <button id="increment-button">
+                            <img src="./img/dollar-sign-solid.svg" alt="$" />
+                        </button>
+                    </div>
+                    <div id="ui-count" class="hud">
+                        <h5>Count</h5>
+                        <h6 id="count">0</h6>
+                    </div>
+                    <div id="ui-bankroll" class="hud">
+                        <h5>Bankroll</h5>
+                        <h6 id="bankroll">10000</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

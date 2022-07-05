@@ -1,0 +1,339 @@
+* {
+    display: block;
+    position: relative;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-family: sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: hsl(0, 0%, 13%);
+    letter-spacing: 0.0625rem;
+    text-decoration: none;
+    cursor: default;
+    user-select: none;
+}
+
+html,
+body {
+    display: contents;
+}
+
+head,
+script {
+    display: none;
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: 900;
+    color: hsla(0, 0%, 100%, 100%);
+    text-align: center;
+}
+
+button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3rem;
+    border-radius: 0.25rem;
+    font-weight: 900;
+    color: hsla(0, 0%, 100%, 100%);
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+button::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    height: 50%;
+    background-color: hsla(0, 0%, 100%, 8%);
+    border-top-right-radius: 0.25rem;
+    border-top-left-radius: 0.25rem;
+}
+
+button:hover {
+    filter: brightness(103%);
+}
+
+button:active {
+    filter: brightness(100%);
+}
+
+img {
+    height: 50%;
+}
+
+h5 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 0.25rem;
+    background-color: hsla(0, 0%, 13%, 87%);
+    border-top-right-radius: 0.25rem;
+    border-top-left-radius: 0.25rem;
+    font-weight: 900;
+    color: hsla(0, 0%, 100%, 100%);
+    text-align: center;
+}
+
+h6 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 0.25rem;
+    background-color: hsla(0, 0%, 13%, 21%);
+    border-bottom-right-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+    font-weight: 900;
+    color: hsla(0, 0%, 100%, 100%);
+    text-align: center;
+}
+
+.container {
+    width: 900px;
+    margin-inline: auto;
+    height: 100%;
+}
+
+.competitor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+    background-color: hsla(0, 0%, 13%, 21%);
+    border: 0.125rem solid transparent;
+    border-radius: 0.25rem;
+}
+
+.hand-total {
+    z-index: 1;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10%;
+    aspect-ratio: 1 / 1;
+    font-size: 3rem;
+    font-weight: 900;
+    color: hsla(0, 0%, 100%, 34%);
+}
+
+.hand {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 1rem;
+}
+
+.card {
+    grid-row: 1 / 2;
+    height: 12rem;
+    aspect-ratio: 2.45 / 3.5;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    border-radius: 0.25rem;
+}
+
+.chip {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1 / 1;
+    width: calc((100% - 4.5rem) / 10);
+    background-color: hsla(0, 0%, 13%, 87%);
+    border-top: 0.125rem solid hsla(0, 0%, 100%, 34%);
+    border-bottom: 0.125rem solid hsla(0, 0%, 13%, 13%);
+    border-radius: 5rem;
+    font-weight: 900;
+    color: hsla(0, 0%, 100%, 100%);
+}
+
+.chip::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    height: 50%;
+    background-color: hsla(0, 0%, 100%, 8%);
+    border-top-right-radius: 5rem;
+    border-top-left-radius: 5rem;
+}
+
+.hud {
+    display: flex;
+    flex-direction: column;
+    height: 5rem;
+    border-radius: 0.25rem;
+}
+
+#app-root {
+    position: fixed;
+    inset: 0;
+    background-color: hsl(132, 14%, 42%);
+    background-image: radial-gradient(hsl(95, 26%, 44%) 0%, transparent 100%);
+}
+
+#app-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.5rem;
+}
+
+#app-header {
+    padding: 0.5rem;
+    background-color: hsla(0, 0%, 13%, 87%);
+    border-radius: 0.25rem;
+}
+
+#app-header::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    height: 50%;
+    background-color: hsla(0, 0%, 100%, 8%);
+    border-top-right-radius: 0.25rem;
+    border-top-left-radius: 0.25rem;
+}
+
+#app-ui {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+}
+
+#stand-button {
+    height: 5rem;
+    background-color: crimson;
+    font-size: 1.5rem;
+}
+
+#hit-button {
+    height: 5rem;
+    background-color: seagreen;
+    font-size: 1.5rem;
+}
+
+#deal-button {
+    grid-column: span 2;
+    background-color: dodgerblue;
+}
+
+#stand-button:disabled,
+#hit-button:disabled,
+#deal-button:disabled,
+#stand-button:disabled {
+    background-color: hsla(0, 0%, 100%, 13%);
+    cursor: not-allowed;
+}
+
+#ui-bookie {
+    grid-column: span 2;
+    display: grid;
+    grid-template-columns: 1fr 60% 1fr;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background-color: hsla(0, 0%, 13%, 21%);
+    border-radius: 0.25rem;
+}
+
+#decrement-button {
+    grid-column: 1 / 2;
+    height: 5rem;
+    background-color: crimson;
+}
+
+#increment-button {
+    grid-column: 3 / 4;
+    height: 5rem;
+    background-color: seagreen;
+}
+
+#decrement-button:disabled,
+#increment-button:disabled {
+    background-color: hsla(0, 0%, 100%, 13%);
+    cursor: not-allowed;
+}
+
+#jumbotron {
+    grid-column: 2 / 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    height: 5rem;
+    padding: 0 1.25rem;
+    background-color: hsla(0, 0%, 13%, 87%);
+    border: 0.125rem solid transparent;
+    border-radius: 0.25rem;
+}
+
+#jumbotron::after {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 900;
+    font-size: 2rem;
+    text-transform: uppercase;
+}
+
+#jumbotron.place-bet::after {
+    content: "Place Bet";
+    color: hsla(0, 0%, 100%, 66%);
+}
+
+#jumbotron.dealer-wins {
+    border: 0.125rem solid crimson;
+}
+
+#jumbotron.dealer-wins::after {
+    content: "Dealer Wins";
+    color: crimson;
+}
+
+#jumbotron.player-bust {
+    border: 0.125rem solid crimson;
+}
+
+#jumbotron.player-bust::after {
+    content: "Player Busts";
+    color: crimson;
+}
+
+#jumbotron.player-wins {
+    border: 0.125rem solid chartreuse;
+}
+
+#jumbotron.player-wins::after {
+    content: "Player Wins";
+    color: chartreuse;
+}
+
+#jumbotron.draw {
+    border: 0.125rem solid hsla(0, 0%, 100%, 34%);
+}
+
+#jumbotron.draw::after {
+    content: "Draw";
+    color: hsla(0, 0%, 100%, 34%);
+}
+
+#bankroll.dealer-wins::after {
+    content: "";
+}
+
+#bankroll.player-wins::after {
+    content: "";
+}
