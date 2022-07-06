@@ -1,0 +1,139 @@
+* {
+    display: block;
+    position: relative;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    overflow: hidden;
+    font-family: sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #ffffff;
+    text-decoration: none;
+    cursor: default;
+    user-select: none;
+    transition: all 1000 cubic-bezier(0.6, -0.28, 0.735, 0.045);
+    border: thin dashed red;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+html {
+    display: contents;
+}
+
+head,
+script {
+    display: none;
+}
+
+body {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f8f8;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 5rem;
+    background-color: #ce2724;
+    box-shadow: 0 0.5rem 1rem hsla(0, 0%, 13%, 0.21);
+}
+
+header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    height: 50%;
+    border-top-right-radius: 0.25rem;
+    border-top-left-radius: 0.25rem;
+    background-color: #ffffff;
+    opacity: 0.125;
+}
+
+h1 {
+    font-size: 3rem;
+    font-weight: 900;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    height: 100%;
+    padding: 2rem;
+    background-color: #231f20;
+}
+
+main::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("./dojo.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0.5;
+}
+
+button {
+    padding: 0.5rem 3rem;
+    background-color: #ce2724;
+    border-radius: 0.25rem;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+p {
+    font-size: 1.5rem;
+}
+
+button::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    height: 50%;
+    border-top-right-radius: 0.25rem;
+    border-top-left-radius: 0.25rem;
+    background-color: #ffffff;
+    opacity: 0.125;
+}
+
+#app {
+    width: 987px;
+    aspect-ratio: 2 / 3;
+    background-color: #ffffff;
+    border-radius: 0.25rem;
+    box-shadow: 0 0.5rem 1rem hsla(0, 0%, 13%, 0.21);
+}
+
+#jokes {
+    height: 13rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    border: 0.25rem solid #ce2724;
+    border-radius: 0.25rem;
+}
+
+#jokes::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: #ffffff;
+    border-radius: 0.25rem;
+    opacity: 0.125;
+}
