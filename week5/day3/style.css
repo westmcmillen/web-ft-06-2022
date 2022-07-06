@@ -94,10 +94,6 @@ button {
     cursor: pointer;
 }
 
-p {
-    font-size: 1.5rem;
-}
-
 button::before {
     content: "";
     position: absolute;
@@ -107,6 +103,47 @@ button::before {
     border-top-left-radius: 0.25rem;
     background-color: #ffffff;
     opacity: 0.125;
+}
+
+p {
+    font-size: 1.5rem;
+}
+
+img {
+    width: 8rem;
+    cursor: pointer;
+}
+
+.modal-header {
+    width: 100%;
+    height: 3rem;
+    font-weight: 900;
+}
+
+.modal-tile {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 13rem;
+    cursor: pointer;
+}
+
+.modal-tile::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: #ffffff;
+    border-radius: 0.25rem;
+    opacity: 0.125;
+}
+
+.modal-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    cursor: pointer;
 }
 
 #app {
@@ -136,4 +173,14 @@ button::before {
     background-color: #ffffff;
     border-radius: 0.25rem;
     opacity: 0.125;
+}
+
+#modals {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+}
+
+#instructions {
+    grid-column: 1 / 4;
 }

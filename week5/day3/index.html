@@ -4,14 +4,14 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Dad DoJoe</title>
+        <title>Dad Dojoe</title>
         <link rel="stylesheet" href="style.css" />
         <script defer src="app.js"></script>
     </head>
     <body>
         <div id="app">
             <header>
-                <h1>Dad DoJoe</h1>
+                <h1>Dad Dojoe</h1>
             </header>
             <main>
                 <section id="jokes">
@@ -19,20 +19,32 @@
                     <button id="random-button">Next</button>
                 </section>
                 <section id="modals">
-                    <div id="shirt">
-                        <img src="" alt="shirt" hidden />
+                    <div id="shirt" class="modal-tile">
+                        <header class="modal-header">The Tight Tuck</header>
+                        <div class="modal-image">
+                            <img src="./shirt-solid.svg" alt="shirt" hidden />
+                        </div>
                     </div>
-                    <div id="pants">
-                        <img src="" alt="pants" hidden />
+                    <div id="shirt" class="modal-tile">
+                        <header class="modal-header">The Tight Tuck</header>
+                        <div class="modal-image">
+                            <img src="./shirt-solid.svg" alt="shirt" hidden />
+                        </div>
                     </div>
-                    <div id="shoes">
-                        <img src="" alt="shoes" hidden />
+                    <div id="shirt" class="modal-tile">
+                        <header class="modal-header">The Tight Tuck</header>
+                        <div class="modal-image">
+                            <img src="./shirt-solid.svg" alt="shirt" hidden />
+                        </div>
                     </div>
-                    <div id="video">
-                        <video src="./dad.mp4" type="video/mp4" hidden></video>
+                    <div id="instructions" class="modal-tile">
+                        <header class="modal-header">How To Video</header>
+                        <div class="modal-image">
+                            <video src="./dad.mp4" type="video/mp4" hidden></video>
+                        </div>
                     </div>
                 </section>
-                <div id="modal-curtain">
+                <div id="modal-curtain" hidden>
                     <button id="close"></button>
                 </div>
             </main>
