@@ -10,16 +10,65 @@
     </head>
     <body>
         <div id="app">
-            <div id="app-container">
-                <section id="app-hero"></section>
-                <section id="app-main">
-                    <div id="main-container">
-                        <form action="/" method="get" id="app-form">
-                            <input id="user-input" type="text" />
-                            <button type="submit" id="submit-button">Submit</button>
+            <div id="app-curtain"></div>
+            <div id="app-border">
+                <div id="app-container">
+                    <div id="app-hero">
+                        <h2 id="overview"></h2>
+                        <h3 id="region"></h3>
+                        <h1 id="degrees"></h1>
+                    </div>
+                    <img src="/img/mountains.png" alt="" />
+                    <div id="app-main">
+                        <h2 id="main-header"></h2>
+                        <div id="detail-carousel">
+                            <div class="app-details">
+                                <div class="detail">
+                                    <h4 class="key">High</h4>
+                                    <p id="high" class="value"></p>
+                                </div>
+                                <div class="detail">
+                                    <h4 class="key">Low</h4>
+                                    <p id="low" class="value"></p>
+                                </div>
+                                <div class="detail">
+                                    <h4 class="key">Currently</h4>
+                                    <p id="current" class="value"></p>
+                                </div>
+                                <div class="detail">
+                                    <h4 class="key">Feels Like</h4>
+                                    <p id="feels-like" class="value"></p>
+                                </div>
+                                <div class="detail">
+                                    <h4 class="key">Humidity</h4>
+                                    <p id="humidity" class="value"></p>
+                                </div>
+                            </div>
+                            <div class="app-details">
+                                <div class="detail">
+                                    <h4 class="key">Sunrise</h4>
+                                    <p id="sunrise" class="value"></p>
+                                </div>
+                                <div class="detail">
+                                    <h4 class="key">Sunset</h4>
+                                    <p id="sunset" class="value"></p>
+                                </div>
+                                <div class="detail">
+                                    <h4 class="key">Wind Speed</h4>
+                                    <p id="wind-speed" class="value"></p>
+                                </div>
+                                <div class="detail">
+                                    <h4 class="key">Visibility</h4>
+                                    <p id="visibility" class="value"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <form id="app-form">
+                            <input type="text" id="user-input" />
+                            <button type="submit" id="submit-button" disabled>Submit</button>
                         </form>
                     </div>
-                </section>
+                </div>
             </div>
         </div>
     </body>
