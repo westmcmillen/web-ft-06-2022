@@ -1,6 +1,5 @@
 const API_KEY = "6294f856cb4c4ac8ec87a8bc58237151";
 
-const curtain = document.getElementById("app-curtain");
 const overview = document.getElementById("overview");
 const region = document.getElementById("region");
 const degrees = document.getElementById("degrees");
