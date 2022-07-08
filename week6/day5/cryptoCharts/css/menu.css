@@ -1,0 +1,154 @@
+.menu-btn-container {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.menu-btn-icon {
+    width: 50%;
+    height: 0.25rem;
+    background-color: hsl(0, 0%, 100%, 100%);
+    border-radius: 1rem;
+    cursor: pointer;
+}
+
+.app-nav-link {
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+}
+
+.app-nav-link:hover {
+    color: lime;
+}
+
+#app-menu {
+    z-index: 1;
+    position: absolute;
+    inset: 0;
+    transform: translateY(-100%);
+}
+
+#app-menu[data-state="collapsed"] {
+    transition-delay: 377ms;
+}
+
+#app-menu[data-state="expanded"] {
+    transform: translateY(0);
+}
+
+#app-menu .menu-blinder:nth-child(1) {
+    position: absolute;
+    inset: 0;
+    right: 50%;
+    background-color: hsla(0, 0%, 10%, 100%);
+}
+
+#app-menu[data-state="collapsed"] .menu-blinder:nth-child(1) {
+    transform: translateX(-100%);
+    transition: all 377ms cubic-bezier(0.6, -0.28, 0.735, 0.045);
+}
+
+#app-menu[data-state="expanded"] .menu-blinder:nth-child(1) {
+    transform: translateX(0);
+    transition: all 233ms cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+#app-menu .menu-blinder:nth-child(2) {
+    position: absolute;
+    inset: 0;
+    left: 50%;
+    background-color: hsla(0, 0%, 10%, 100%);
+}
+
+#app-menu[data-state="collapsed"] .menu-blinder:nth-child(2) {
+    transform: translateX(100%);
+    transition: all 377ms cubic-bezier(0.6, -0.28, 0.735, 0.045);
+}
+
+#app-menu[data-state="expanded"] .menu-blinder:nth-child(2) {
+    transform: translateX(0);
+    transition: all 233ms cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+#app-nav {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#app-menu[data-state="collapsed"] #app-nav {
+    color: transparent;
+    transform: translateY(-100%);
+    transition: all 55ms cubic-bezier(0.6, -0.28, 0.735, 0.045);
+}
+
+#app-menu[data-state="expanded"] #app-nav {
+    transform: translateY(0);
+    transition: all 377ms cubic-bezier(0.075, 0.82, 0.165, 1) 144ms;
+}
+
+#app-header {
+    z-index: 1;
+    position: absolute;
+    inset: 0;
+    height: 5rem;
+    background-color: hsla(0, 0%, 10%, 100%);
+    box-shadow: 0 0.5rem 1rem hsla(0, 0%, 5%, 100%);
+}
+
+#app-header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    height: 50%;
+    box-shadow: 0 0.5rem 1rem hsla(0, 0%, 9%, 100%);
+}
+
+#app-header .app-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+#app-menu-btn {
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    cursor: pointer;
+}
+
+#app-menu-btn[data-state="collapsed"] .menu-btn-container:nth-child(1) .menu-btn-icon {
+    transform: translateY(-0.5rem);
+    transition: all 233ms cubic-bezier(0.6, -0.28, 0.735, 0.045);
+}
+
+#app-menu-btn[data-state="collapsed"] .menu-btn-container:nth-child(2) .menu-btn-icon {
+    transition: all 233ms cubic-bezier(0.075, 0.82, 0.165, 1) 144ms;
+}
+
+#app-menu-btn[data-state="collapsed"] .menu-btn-container:nth-child(3) .menu-btn-icon {
+    transform: translateY(0.5rem);
+    transition: all 233ms cubic-bezier(0.6, -0.28, 0.735, 0.045);
+}
+
+#app-menu-btn[data-state="expanded"] .menu-btn-container:nth-child(1) .menu-btn-icon {
+    transform: rotate(-45deg);
+    transition: all 377ms cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+#app-menu-btn[data-state="expanded"] .menu-btn-container:nth-child(2) .menu-btn-icon {
+    background-color: transparent;
+    transform: rotate(-45deg);
+    transition: all 377ms cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+#app-menu-btn[data-state="expanded"] .menu-btn-container:nth-child(3) .menu-btn-icon {
+    transform: rotate(45deg);
+    transition: all 377ms cubic-bezier(0.075, 0.82, 0.165, 1);
+}

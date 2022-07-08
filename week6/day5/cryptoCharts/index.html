@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>CyptoCharts</title>
+        <link defer rel="stylesheet" href="/week6/day5/cryptoCharts/css/style.css" />
+        <link defer rel="stylesheet" href="/week6/day5/cryptoCharts/css/menu.css" />
+        <link defer rel="stylesheet" href="/week6/day5/cryptoCharts/css/chart.css" />
+        <script defer src="/week6/day5/cryptoCharts/js/config.js"></script>
+        <script defer src="/week6/day5/cryptoCharts/js/app.js"></script>
+    </head>
+    <body>
+        <div id="app-root">
+            <menu id="app-menu" data-state="collapsed">
+                <div class="menu-blinder"></div>
+                <div class="menu-blinder"></div>
+                <nav id="app-nav">
+                    <a href="#" class="app-nav-link">Home</a>
+                    <a href="#" class="app-nav-link">README.md</a>
+                    <a href="#" class="app-nav-link">Blog</a>
+                </nav>
+            </menu>
+            <header id="app-header">
+                <div class="app-container">
+                    <a href="/">
+                        <h1>CryptoCharts</h1>
+                    </a>
+                    <button id="app-menu-btn" data-state="collapsed">
+                        <div class="menu-btn-container">
+                            <i class="menu-btn-icon"></i>
+                        </div>
+                        <div class="menu-btn-container">
+                            <i class="menu-btn-icon"></i>
+                        </div>
+                        <div class="menu-btn-container">
+                            <i class="menu-btn-icon"></i>
+                        </div>
+                    </button>
+                </div>
+            </header>
+            <main id="app-main">
+                <div class="app-container">
+                    <nav id="chart-nav">
+                        <button class="chart-tab" data-state="active">BTC</button>
+                        <button class="chart-tab">ETH</button>
+                        <button class="chart-tab">+</button>
+                    </nav>
+                    <div id="chart" data-state="">
+                        <div id="chart-data-y"></div>
+                        <div id="chart-data-x"></div>
+                        <div id="chart-data"></div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </body>
+</html>
