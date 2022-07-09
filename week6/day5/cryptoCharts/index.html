@@ -43,18 +43,11 @@
             <main id="app-main">
                 <div class="app-container">
                     <nav id="chart-nav">
-                        <button class="chart-tab" data-state="active">BTC</button>
-                        <button class="chart-tab">ETH</button>
-                        <form action="/" id="add-chart-btn">
-                            <input type="text" id="new-ticker" class="chart-tab" />
-                            <button type="submit" id="tab-submit-btn"></button>
+                        <form action="/" id="add-tab" class="chart-tab">
+                            <input type="text" id="add-tab-ticker" autocomplete="off" placeholder="+" />
                         </form>
                     </nav>
-                    <div id="chart" data-state="">
-                        <div id="chart-data-y"></div>
-                        <div id="chart-data-x"></div>
-                        <div id="chart-data"></div>
-                    </div>
+                    <div id="chart" data-state=""></div>
                 </div>
             </main>
         </div>

@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: hsla(0, 0%, 15%, 100%);
+    background-color: hsla(0, 0%, 12.5%, 100%);
     border-top-right-radius: 0.25rem;
     border-top-left-radius: 0.25rem;
     font-weight: 900;
@@ -11,7 +11,7 @@
 }
 
 .chart-tab[data-state="active"] {
-    background-color: hsla(0, 0%, 20%, 100%);
+    background-color: hsla(0, 0%, 15%, 100%);
 }
 
 #tab-submit-btn {
@@ -25,11 +25,11 @@
 }
 
 #app-main .app-container {
-    padding: 2rem;
+    padding: 1rem;
 }
 
 #chart[data-state="min"] {
-    background-color: hsla(0, 0%, 15%, 100%);
+    background-color: hsla(0, 0%, 12.5%, 100%);
 }
 
 #chart[data-state="max"] {
@@ -43,42 +43,19 @@
     height: 3rem;
 }
 
+#add-tab-ticker::placeholder {
+    font-size: 1.25rem;
+    color: hsla(0, 0%, 100%, 100%);
+}
+
+#add-tab-ticker:focus::placeholder {
+    color: transparent;
+}
+
 #chart {
     width: 100%;
     height: calc(100% - 3rem);
-    background-color: hsla(0, 0%, 20%, 100%);
+    background-color: hsla(0, 0%, 15%, 100%);
     border-radius: 0.25rem;
     border-top-left-radius: 0;
-}
-
-#chart-data-y {
-    position: absolute;
-    inset: 0;
-    top: 3rem;
-    bottom: 3rem;
-    display: grid;
-    justify-content: center;
-    align-items: space-between;
-    width: 3rem;
-}
-
-#chart-data-x {
-    position: absolute;
-    inset: 0;
-    top: unset;
-    right: 3rem;
-    left: 3rem;
-    display: grid;
-    grid-auto-flow: column;
-    justify-content: space-between;
-    align-items: center;
-    height: 3rem;
-}
-
-#chart-data {
-    position: absolute;
-    inset: 3rem;
-    border-bottom: 0.25rem solid hsla(0, 0%, 25%, 100%);
-    border-left: 0.25rem solid hsla(0, 0%, 25%, 100%);
-    border-radius: 0.25rem;
 }

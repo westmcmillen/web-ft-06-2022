@@ -2,6 +2,9 @@ const key = config.API_KEY;
 
 const menu = document.getElementById("app-menu");
 const menuBtn = document.getElementById("app-menu-btn");
+const chartNav = document.getElementById("chart-nav");
+const addTab = document.getElementById("add-tab");
+const tabTicker = document.getElementById("add-tab-ticker");
 
 menuBtn.onclick = () => {
     switch (menu.dataset.state) {
@@ -15,19 +18,54 @@ menuBtn.onclick = () => {
     }
 };
 
-const chartNav = document.getElementById("chart-nav");
-const addChartBtn = document.getElementById("add-chart-btn");
-const newTicker = document.getElementById("new-ticker");
-
-const createChartTab = () => {
+const createChartTab = ticker => {
     const button = document.createElement("button");
     button.className = "chart-tab";
-    button.innerText = newTicker.value;
-    chartNav.insertBefore(button, chartNav.children[chartNav.children.length - 1]);
-    newTicker.value = "";
+    button.innerText = ticker;
+    return button;
 };
 
-addChartBtn.onsubmit = event => {
+const insertChartTab = chartTab => {
+    chartNav.insertBefore(chartTab, chartNav.lastElementChild);
+};
+
+const appendChartTab = chartTab => {
+    chartNav.append(chartTab);
+};
+
+const clearTabTicker = () => {
+    tabTicker.value = "";
+    tabTicker.blur();
+};
+
+const clearTabState = () => {
+    for (let tab of chartNav.children) {
+        tab.dataset.state = "";
+    }
+};
+
+const setTabState = tab => {
+    clearTabState();
+    tab.dataset.state = "active";
+};
+
+addTab.onsubmit = event => {
     event.preventDefault();
-    createChartTab();
+    if (chartNav.children.length < 8) {
+        const ticker = tabTicker.value;
+        const tab = createChartTab(ticker);
+        insertChartTab(tab);
+        clearTabTicker();
+        setTabState(tab);
+        return;
+    }
+    if (chartNav.children.length === 8) {
+        const ticker = tabTicker.value;
+        const tab = createChartTab(ticker);
+        addTab.remove();
+        appendChartTab(tab);
+        clearTabState();
+        setTabState(tab);
+        return;
+    }
 };
