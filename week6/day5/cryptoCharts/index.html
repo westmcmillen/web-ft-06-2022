@@ -45,7 +45,10 @@
                     <nav id="chart-nav">
                         <button class="chart-tab" data-state="active">BTC</button>
                         <button class="chart-tab">ETH</button>
-                        <button class="chart-tab">+</button>
+                        <form action="/" id="add-chart-btn">
+                            <input type="text" id="new-ticker" class="chart-tab" />
+                            <button type="submit" id="tab-submit-btn"></button>
+                        </form>
                     </nav>
                     <div id="chart" data-state="">
                         <div id="chart-data-y"></div>

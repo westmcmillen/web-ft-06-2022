@@ -41,6 +41,16 @@ h1 {
     cursor: pointer;
 }
 
+form {
+    display: contents;
+}
+
+input {
+    padding: 0 1rem;
+    text-transform: uppercase;
+    text-align: center;
+}
+
 #app-root {
     position: fixed;
     inset: 0;

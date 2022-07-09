@@ -6,11 +6,16 @@
     border-top-right-radius: 0.25rem;
     border-top-left-radius: 0.25rem;
     font-weight: 900;
+    text-transform: uppercase;
     cursor: pointer;
 }
 
 .chart-tab[data-state="active"] {
     background-color: hsla(0, 0%, 20%, 100%);
+}
+
+#tab-submit-btn {
+    display: none;
 }
 
 #app-main {
