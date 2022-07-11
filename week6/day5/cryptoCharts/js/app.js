@@ -5,6 +5,7 @@ const menuBtn = document.getElementById("app-menu-btn");
 const chartNav = document.getElementById("chart-nav");
 const addTab = document.getElementById("add-tab");
 const tabTicker = document.getElementById("add-tab-ticker");
+const chartData = document.getElementById("chart-data");
 
 menuBtn.onclick = () => {
     switch (menu.dataset.state) {
@@ -51,6 +52,7 @@ const setTabState = tab => {
 
 addTab.onsubmit = event => {
     event.preventDefault();
+    chartData.dataset.state = "";
     if (chartNav.children.length < 8) {
         const ticker = tabTicker.value;
         const tab = createChartTab(ticker);

@@ -28,14 +28,6 @@
     padding: 1rem;
 }
 
-#chart[data-state="min"] {
-    background-color: hsla(0, 0%, 12.5%, 100%);
-}
-
-#chart[data-state="max"] {
-    border-top-right-radius: 0;
-}
-
 #chart-nav {
     display: grid;
     grid-template-columns: repeat(8, 1fr);
@@ -52,10 +44,18 @@
     color: transparent;
 }
 
-#chart {
+#chart-data {
     width: 100%;
     height: calc(100% - 3rem);
     background-color: hsla(0, 0%, 15%, 100%);
     border-radius: 0.25rem;
     border-top-left-radius: 0;
+}
+
+#chart-data[data-state="min"] {
+    background-color: hsla(0, 0%, 12.5%, 100%);
+}
+
+#chart-data[data-state="max"] {
+    border-top-right-radius: 0;
 }
