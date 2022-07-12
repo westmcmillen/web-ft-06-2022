@@ -18,13 +18,13 @@
 }
 
 @media screen and (max-width: 786px) {
-    * {
+    :root {
         font-size: 12px;
     }
 }
 
 @media screen and (max-width: 390px) {
-    * {
+    :root {
         font-size: 8px;
     }
 }
@@ -289,11 +289,12 @@ script {
     background-color: hsla(0, 0%, 20%, 100%);
 }
 
-.chart[data-set="inactive"] {
-    z-index: -1;
+.chart[data-state="inactive"] {
+    display: none;
 }
 
-.chart[data-set="active"] {
+.chart[data-state="active"] {
+    display: grid;
 }
 
 .candlestick {
