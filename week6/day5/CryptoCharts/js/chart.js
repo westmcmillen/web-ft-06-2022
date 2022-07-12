@@ -1,4 +1,5 @@
-const chart = document.getElementById("chart");
+// const chart = document.getElementById("chart");
+const chartMount = document.getElementById("chart-mount");
 
 const plotChart = async () => {
     const response = await fetch(`https://www.alphavantage.co/query?function=CRYPTO_INTRADAY&symbol=BTC&market=USD&interval=1min&apikey=${config.API_KEY}`);
@@ -14,7 +15,10 @@ const plotChart = async () => {
 
     let column = 1;
 
-    chart.innerHTML = null;
+    chartMount.innerHTML = null;
+
+    const chart = document.createElement("figure");
+    chart.className = "chart";
 
     ohlc.reverse().map(value => {
         value["1. open"] = Math.round((value["1. open"] - periodLow) / periodRange / 0.01);
@@ -48,9 +52,10 @@ const plotChart = async () => {
         chart.append(candlestick);
         column = column + 4;
     });
+    chartMount.firstElementChild.append(chart);
 };
 
-// plotChart();
+plotChart();
 // setInterval(() => {
 //     plotChart();
 // }, 60 * 1000);
