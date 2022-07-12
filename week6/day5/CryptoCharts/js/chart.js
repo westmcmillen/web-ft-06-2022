@@ -1,7 +1,7 @@
+const API_KEY = config.API_KEY;
 const chart = document.getElementById("chart");
-
 const plotChart = async () => {
-    const response = await fetch(`https://www.alphavantage.co/query?function=CRYPTO_INTRADAY&symbol=BTC&market=USD&interval=1min&apikey=${config.API_KEY}`);
+    const response = await fetch(`https://www.alphavantage.co/query?function=CRYPTO_INTRADAY&symbol=BTC&market=USD&interval=1min&apikey=${API_KEY}`);
     const json = await response.json();
     const timeSeries = json["Time Series Crypto (1min)"];
     const ohlc = Object.values(timeSeries);
@@ -14,10 +14,7 @@ const plotChart = async () => {
 
     let column = 1;
 
-    chartMount.innerHTML = null;
-
-    const chart = document.createElement("figure");
-    chart.className = "chart";
+    chart.innerHTML = null;
 
     ohlc.reverse().map(value => {
         value["1. open"] = Math.round((value["1. open"] - periodLow) / periodRange / 0.01);
