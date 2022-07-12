@@ -1,5 +1,4 @@
-// const chart = document.getElementById("chart");
-const chartMount = document.getElementById("chart-mount");
+const chart = document.getElementById("chart");
 
 const plotChart = async () => {
     const response = await fetch(`https://www.alphavantage.co/query?function=CRYPTO_INTRADAY&symbol=BTC&market=USD&interval=1min&apikey=${config.API_KEY}`);
@@ -52,10 +51,6 @@ const plotChart = async () => {
         chart.append(candlestick);
         column = column + 4;
     });
-    chartMount.firstElementChild.append(chart);
 };
 
 plotChart();
-// setInterval(() => {
-//     plotChart();
-// }, 60 * 1000);
