@@ -1,25 +1,11 @@
 const API_KEY = config.API_KEY;
 
-const appNav = document.getElementById("app-nav");
-const hamburger = document.getElementById("hamburger");
 const chartNav = document.getElementById("chart-nav");
 const tabForm = document.getElementById("tab-form");
 const tabInput = document.getElementById("tab-input");
 const chartMount = document.getElementById("chart-mount");
 
 const tickerHash = {};
-
-hamburger.onclick = () => {
-    switch (hamburger.dataset.state) {
-        case "collapsed":
-            hamburger.dataset.state = "expanded";
-            appNav.dataset.state = "expanded";
-            break;
-        default:
-            hamburger.dataset.state = "collapsed";
-            appNav.dataset.state = "collapsed";
-    }
-};
 
 const getTabInputValue = () => {
     const tabInputValue = tabInput.value.toUpperCase();
@@ -262,7 +248,6 @@ window.onload = () => {
 // Save to localstorage
 
 // Fix tabForm issue
-// Update candlesticks every minute
 // Adjust css media quieries
 // Hover effects
 // Make feedback page
