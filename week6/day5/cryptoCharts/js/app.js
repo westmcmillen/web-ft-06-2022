@@ -22,7 +22,7 @@ hamburger.onclick = () => {
 };
 
 const getTabInputValue = () => {
-    const tabInputValue = tabInput.value;
+    const tabInputValue = tabInput.value.toUpperCase();
     return tabInputValue;
 };
 
@@ -107,6 +107,7 @@ const createWick = (column, row) => {
 const getData = async ticker => {
     const response = await fetch(`https://www.alphavantage.co/query?function=CRYPTO_INTRADAY&symbol=${ticker}&market=USD&interval=1min&apikey=${API_KEY}`);
     const data = await response.json();
+    console.log(data);
     return data;
 };
 
@@ -231,3 +232,11 @@ tabForm.onsubmit = event => {
         clearTabInputValue();
     }
 };
+
+// Fix tabForm issue
+// Update candlesticks every minute
+// Adjust css media quieries
+// Hover effects
+// Make feedback page
+// Make  README.md
+// Make blog page
