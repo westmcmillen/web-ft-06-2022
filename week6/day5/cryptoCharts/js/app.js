@@ -7,6 +7,8 @@ const tabForm = document.getElementById("tab-form");
 const tabInput = document.getElementById("tab-input");
 const chartMount = document.getElementById("chart-mount");
 
+const tickerHash = {};
+
 hamburger.onclick = () => {
     switch (hamburger.dataset.state) {
         case "collapsed":
@@ -29,15 +31,35 @@ const clearTabInputValue = () => {
     tabInput.blur();
 };
 
+const createTabBtnIcon = () => {
+    const div = document.createElement("div");
+    div.className = "container";
+    const i = document.createElement("i");
+    i.className = "tab-icon";
+    div.append(i);
+    return div;
+};
+
+const createTabBtn = ticker => {
+    const button = document.createElement("button");
+    button.className = "tab-btn";
+    button.dataset.ticker = ticker;
+    button.append(createTabBtnIcon());
+    button.append(createTabBtnIcon());
+    return button;
+};
+
 const createTab = ticker => {
     const div = document.createElement("div");
-    const h6 = document.createElement("h6");
     div.className = "chart-tab";
     div.dataset.ticker = ticker;
+    const h6 = document.createElement("h6");
     h6.className = "chart-ticker";
     h6.innerText = ticker;
-    div.append(h6);
-    div.onclick = event => setTabAndChartToActiveOnClick(event);
+    const button = createTabBtn(ticker);
+    button.onclick = () => removeTabAndChart(ticker);
+    div.append(h6, button);
+    div.onclick = () => setTabAndChartToActive(ticker);
     return div;
 };
 
@@ -122,7 +144,7 @@ const renderChart = ticker => {
     chartMount.append(chart);
 };
 
-const setLastTabAndChartToActive = ticker => {
+const setTabAndChartToActive = ticker => {
     const chartTabs = document.getElementsByClassName("chart-tab");
     const charts = document.getElementsByClassName("chart");
     [...chartTabs].map(chartTab => {
@@ -141,31 +163,71 @@ const setLastTabAndChartToActive = ticker => {
     });
 };
 
-const setTabAndChartToActiveOnClick = event => {
-    const ticker = event.target.dataset.ticker;
+const createTabForm = () => {
+    const form = document.createElement("form");
+    form.action = "/";
+    form.id = "tab-form";
+    const input = document.createElement("input");
+    input.type = "text";
+    input.id = "tab-input";
+    input.placeholder = "+";
+    input.autocomplete = "off";
+    form.append(input);
+    return form;
+};
+
+const renderTabForm = () => {
+    const tabForm = createTabForm();
+    chartNav.firstElementChild.append(tabForm);
+    tabForm.onsubmit = event => {
+        event.preventDefault();
+        const ticker = getTabInputValue();
+        if (ticker in tickerHash) {
+            setTabAndChartToActive(ticker);
+            clearTabInputValue();
+        } else {
+            tickerHash[ticker] = (tickerHash[ticker] || 0) + 1;
+            renderTab(ticker);
+            renderChart(ticker);
+            setTabAndChartToActive(ticker);
+            clearTabInputValue();
+        }
+    };
+};
+
+const removeTabAndChart = ticker => {
     const chartTabs = document.getElementsByClassName("chart-tab");
     const charts = document.getElementsByClassName("chart");
     [...chartTabs].map(chartTab => {
         chartTab.dataset.state = "inactive";
         switch (chartTab.dataset.ticker) {
             case ticker:
-                chartTab.dataset.state = "active";
+                chartTab.remove();
         }
     });
     [...charts].map(chart => {
         chart.dataset.state = "inactive";
         switch (chart.dataset.ticker) {
             case ticker:
-                chart.dataset.state = "active";
+                chart.remove();
         }
     });
+    if (chartNav.firstElementChild.children.length < 5) {
+        tabForm.style.display = "contents";
+    }
 };
 
 tabForm.onsubmit = event => {
     event.preventDefault();
     const ticker = getTabInputValue();
-    renderTab(ticker);
-    renderChart(ticker);
-    setLastTabAndChartToActive(ticker);
-    clearTabInputValue();
+    if (ticker in tickerHash) {
+        setTabAndChartToActive(ticker);
+        clearTabInputValue();
+    } else {
+        tickerHash[ticker] = (tickerHash[ticker] || 0) + 1;
+        renderTab(ticker);
+        renderChart(ticker);
+        setTabAndChartToActive(ticker);
+        clearTabInputValue();
+    }
 };

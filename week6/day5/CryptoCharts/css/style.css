@@ -18,13 +18,13 @@
 }
 
 @media screen and (max-width: 786px) {
-    :root {
+    * {
         font-size: 12px;
     }
 }
 
 @media screen and (max-width: 390px) {
-    :root {
+    * {
         font-size: 8px;
     }
 }
@@ -228,7 +228,6 @@ script {
     grid-auto-flow: column;
     gap: 0.5rem;
     height: 100%;
-    padding: 0 1.5rem;
 }
 
 #tab-form {
@@ -256,8 +255,8 @@ script {
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
     background-color: hsla(0, 0%, 15%, 100%);
+    cursor: pointer;
 }
 
 .chart-tab[data-state="active"] {
@@ -270,11 +269,47 @@ script {
     cursor: pointer;
 }
 
+.tab-btn {
+    position: absolute;
+    inset: 0;
+    left: unset;
+    aspect-ratio: 1 / 1;
+    cursor: pointer;
+}
+
+.tab-btn > .container {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.tab-icon {
+    width: 25%;
+    height: 0.25rem;
+    background-color: hsl(0, 0%, 50%, 100%);
+    border-radius: 0.0625rem;
+    cursor: pointer;
+}
+
+.tab-btn > .container:nth-child(1) .tab-icon {
+    transform: rotate(-45deg);
+}
+
+.tab-btn > .container:nth-child(2) .tab-icon {
+    transform: rotate(45deg);
+}
+
+.tab-btn:hover .tab-icon {
+    background-color: hsl(0, 0%, 100%, 100%);
+}
+
 #chart-mount {
     position: absolute;
     inset: 0;
     top: 3rem;
-    margin: 0 1.5rem;
     background-color: hsla(0, 0%, 15%, 100%);
 }
 
@@ -288,6 +323,31 @@ script {
     background-color: hsla(0, 0%, 20%, 100%);
 }
 
+.chart::before {
+    content: attr(data-ticker);
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 37.5rem;
+    font-weight: 900;
+    color: hsla(0, 0%, 22.5%, 100%);
+    text-transform: uppercase;
+}
+
+@media screen and (max-width: 786px) {
+    .chart::before {
+        font-size: 25rem;
+    }
+}
+
+@media screen and (max-width: 390px) {
+    .chart::before {
+        font-size: 12.5rem;
+    }
+}
+
 .chart[data-state="inactive"] {
     display: none;
 }
@@ -298,11 +358,11 @@ script {
 
 .candlestick {
     height: 100%;
-    border: thin solid hsla(0, 0%, 12.5%, 100%);
+    border: 0.0625rem solid hsla(0, 0%, 12.5%, 100%);
 }
 
 .wick {
     height: 100%;
     background-color: hsla(0, 0%, 50%, 100%);
-    border: thin solid hsla(0, 0%, 37.5%, 100%);
+    border: 0.0625rem solid hsla(0, 0%, 37.5%, 100%);
 }
