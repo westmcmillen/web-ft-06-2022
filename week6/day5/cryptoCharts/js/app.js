@@ -244,6 +244,27 @@ window.onload = () => {
     }
 };
 
+let zoom = 1;
+chartMount.onscroll = event => {
+    const charts = document.getElementsByClassName("chart");
+    charts[0].style.width = `${100 + zoom}%`;
+    zoom++;
+};
+
+const zoomIn = () => {
+    const chart = document.getElementsByClassName("chart")[0];
+    const width = chart.style.width;
+    console.log(width);
+    chart.style.width = `${chart.style.width * 2}%`;
+};
+
+const zoomOut = () => {
+    const chart = document.getElementsByClassName("chart")[0];
+    const width = chart.style.width;
+    console.log(width);
+    chart.style.width = `${chart.style.width * 2}%`;
+};
+
 // COMPLETED
 // Save to localstorage
 
