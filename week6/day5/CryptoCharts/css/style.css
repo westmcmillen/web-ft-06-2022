@@ -319,6 +319,7 @@ script {
     display: grid;
     grid-auto-flow: column;
     grid-template-rows: repeat(100, minmax(0, 1fr));
+    justify-content: flex-end;
     padding: 2rem;
     background-color: hsla(0, 0%, 20%, 100%);
 }
@@ -357,12 +358,13 @@ script {
 }
 
 .candlestick {
+    transform: scale(50%);
     height: 100%;
-    border: 0.0625rem solid hsla(0, 0%, 12.5%, 100%);
+    /* border: 0.0625rem solid hsla(0, 0%, 12.5%, 100%); */
 }
 
 .wick {
     height: 100%;
     background-color: hsla(0, 0%, 50%, 100%);
-    border: 0.0625rem solid hsla(0, 0%, 37.5%, 100%);
+    /* border: 0.0625rem solid hsla(0, 0%, 37.5%, 100%); */
 }

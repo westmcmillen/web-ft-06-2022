@@ -105,18 +105,21 @@ const createWick = (column, row) => {
 };
 
 const getData = async ticker => {
-    const response = await fetch(`https://www.alphavantage.co/query?function=CRYPTO_INTRADAY&symbol=${ticker}&market=USD&interval=1min&apikey=${API_KEY}`);
+    // const response = await fetch(`https://www.alphavantage.co/query?function=CRYPTO_INTRADAY&symbol=${ticker}&market=USD&interval=1min&apikey=${API_KEY}`);
+    const response = await fetch(`https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_DAILY&symbol=${ticker}&market=USD&apikey=${config.API_KEY}`);
     const data = await response.json();
-    console.log(data);
     return data;
 };
 
 const renderCandlesticks = async chart => {
     const data = await getData(chart.dataset.ticker);
-    const timeSeries = data["Time Series Crypto (1min)"];
+    // const timeSeries = data["Time Series Crypto (1min)"];
+    const timeSeries = data["Time Series (Digital Currency Daily)"];
     const ohlc = Object.values(timeSeries);
-    const periodLow = Math.min(...ohlc.map(value => value["3. low"]));
-    const periodHigh = Math.max(...ohlc.map(value => value["2. high"]));
+    // const periodLow = Math.min(...ohlc.map(value => value["3. low"]));
+    // const periodHigh = Math.max(...ohlc.map(value => value["2. high"]));
+    const periodLow = Math.min(...ohlc.map(value => value["3a. low (USD)"]));
+    const periodHigh = Math.max(...ohlc.map(value => value["2a. high (USD)"]));
     const periodRange = Math.ceil(periodHigh - periodLow);
 
     chart.innerHTML = null;
@@ -125,14 +128,21 @@ const renderCandlesticks = async chart => {
     let colIdx = 0;
 
     ohlc.map(value => {
-        value["1. open"] = Math.round((value["1. open"] - periodLow) / periodRange / 0.01);
-        value["2. high"] = Math.round((value["2. high"] - periodLow) / periodRange / 0.01);
-        value["3. low"] = Math.round((value["3. low"] - periodLow) / periodRange / 0.01);
-        value["4. close"] = Math.round((value["4. close"] - periodLow) / periodRange / 0.01);
+        // value["1. open"] = Math.round((value["1. open"] - periodLow) / periodRange / 0.01);
+        // value["2. high"] = Math.round((value["2. high"] - periodLow) / periodRange / 0.01);
+        // value["3. low"] = Math.round((value["3. low"] - periodLow) / periodRange / 0.01);
+        // value["4. close"] = Math.round((value["4. close"] - periodLow) / periodRange / 0.01);
+        value["1a. open (USD)"] = Math.round((value["1a. open (USD)"] - periodLow) / periodRange / 0.01);
+        value["2a. high (USD)"] = Math.round((value["2a. high (USD)"] - periodLow) / periodRange / 0.01);
+        value["3a. low (USD)"] = Math.round((value["3a. low (USD)"] - periodLow) / periodRange / 0.01);
+        value["4a. close (USD)"] = Math.round((value["4a. close (USD)"] - periodLow) / periodRange / 0.01);
 
-        const candlestick = createCandlestick({ start: colIdx, end: colIdx + 3 }, { start: value["1. open"], end: value["4. close"] });
-        colorCandlestick(candlestick, { start: value["1. open"], end: value["4. close"] });
-        const wick = createWick({ start: colIdx + 1, end: colIdx + 2 }, { start: value["2. high"], end: value["3. low"] });
+        // const candlestick = createCandlestick({ start: colIdx, end: colIdx + 3 }, { start: value["1. open"], end: value["4. close"] });
+        // colorCandlestick(candlestick, { start: value["1. open"], end: value["4. close"] });
+        // const wick = createWick({ start: colIdx + 1, end: colIdx + 2 }, { start: value["2. high"], end: value["3. low"] });
+        const candlestick = createCandlestick({ start: colIdx, end: colIdx + 3 }, { start: value["1a. open (USD)"], end: value["4a. close (USD)"] });
+        colorCandlestick(candlestick, { start: value["1a. open (USD)"], end: value["4a. close (USD)"] });
+        const wick = createWick({ start: colIdx + 1, end: colIdx + 2 }, { start: value["2a. high (USD)"], end: value["3a. low (USD)"] });
         chart.append(wick);
         chart.append(candlestick);
         colIdx += 4;
@@ -216,6 +226,10 @@ const removeTabAndChart = ticker => {
     if (chartNav.firstElementChild.children.length < 5) {
         tabForm.style.display = "contents";
     }
+    if (ticker in tickerHash) {
+        delete tickerHash[ticker];
+        localStorage.setItem("tickers", JSON.stringify(tickerHash));
+    }
 };
 
 tabForm.onsubmit = event => {
@@ -226,12 +240,26 @@ tabForm.onsubmit = event => {
         clearTabInputValue();
     } else {
         tickerHash[ticker] = (tickerHash[ticker] || 0) + 1;
+        localStorage.setItem("tickers", JSON.stringify(tickerHash));
         renderTab(ticker);
         renderChart(ticker);
         setTabAndChartToActive(ticker);
         clearTabInputValue();
     }
 };
+
+window.onload = () => {
+    const tickers = JSON.parse(localStorage.getItem("tickers"));
+    for (let ticker in tickers) {
+        tickerHash[ticker] = (tickerHash[ticker] || 0) + 1;
+        renderTab(ticker);
+        renderChart(ticker);
+        setTabAndChartToActive(ticker);
+    }
+};
+
+// COMPLETED
+// Save to localstorage
 
 // Fix tabForm issue
 // Update candlesticks every minute
