@@ -262,7 +262,6 @@ script {
 
 .chart-tab[data-state="active"] {
     background-color: hsla(0, 0%, 20%, 100%);
-    border: 0.125rem solid hsla(0, 0%, 37.5%, 100%);
 }
 
 .chart-ticker {
