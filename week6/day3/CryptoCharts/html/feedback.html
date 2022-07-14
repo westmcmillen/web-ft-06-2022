@@ -7,13 +7,15 @@
         <title>CryptoCharts</title>
         <link rel="stylesheet" href="../css/reset.css" />
         <link rel="stylesheet" href="../css/global.css" />
+        <link rel="stylesheet" href="../css/feedback.css" />
         <script defer src="../js/global.js"></script>
+        <script defer src="../js/feedback.js"></script>
     </head>
     <body>
         <div id="app-root">
             <menu id="app-menu" data-state="collapsed">
                 <nav id="menu-container">
-                    <a href="" class="menu-link">Charts</a>
+                    <a href="../index.html" class="menu-link">Charts</a>
                     <a href="README.html" class="menu-link">README.md</a>
                     <a href="blog.html" class="menu-link">Blog</a>
                     <a href="feedback.html" class="menu-link">Feedback</a>
@@ -21,7 +23,7 @@
             </menu>
             <header id="app-header">
                 <div id="header-container">
-                    <a href="#" class="header-link">
+                    <a href="../index.html" class="header-link">
                         <h1 id="brand">CryptoCharts</h1>
                     </a>
                     <button id="hamburger" data-state="collapsed">
@@ -37,6 +39,20 @@
                     </button>
                 </div>
             </header>
+            <main id="app-main">
+                <div id="main-container">
+                    <form id="form">
+                        <header id="header">
+                            <h1 id="title">Feedback</h1>
+                            <p id="para">Have some thoughts? Let me know!</p>
+                        </header>
+                        <section id="section">
+                            <textarea id="text-area"></textarea>
+                            <button type="submit" id="submit">Submit</button>
+                        </section>
+                    </form>
+                </div>
+            </main>
         </div>
     </body>
 </html>
