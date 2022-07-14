@@ -38,7 +38,6 @@
         align-items: center;
         height: 100%;
         width: 3rem;
-        border: 0.125rem solid hsla(0, 0%, 18%, 100%);
         background-color: hsla(0, 0%, 15%, 100%);
         font-size: 1.5rem;
         color: hsla(0, 0%, 50%, 100%);
@@ -61,7 +60,6 @@
         align-items: center;
         height: 100%;
         width: 3rem;
-        border: 0.125rem solid hsla(0, 0%, 18%, 100%);
         background-color: hsla(0, 0%, 15%, 100%);
         font-size: 1.5rem;
         color: hsla(0, 0%, 50%, 100%);
@@ -286,7 +284,6 @@
     align-items: center;
     width: 50%;
     height: 100%;
-    border: 0.125rem solid hsla(0, 0%, 18%, 100%);
     background-color: hsla(0, 0%, 15%, 100%);
     cursor: pointer;
 }
@@ -294,7 +291,6 @@
 #zoom-in {
     width: 50%;
     height: 100%;
-    border: 0.125rem solid hsla(0, 0%, 18%, 100%);
     background-color: hsla(0, 0%, 15%, 100%);
     cursor: pointer;
 }

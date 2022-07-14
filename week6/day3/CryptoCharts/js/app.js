@@ -1,4 +1,3 @@
-const appMenu = document.getElementById("app-menu");
 const hamburger = document.getElementById("hamburger");
 const chartNavContainer = document.getElementById("chart-nav-container");
 const chartInput = document.getElementById("chart-input");
@@ -9,18 +8,6 @@ const zoomIn = document.getElementById("zoom-in");
 const tickerHash = {};
 
 let magnification = 3;
-
-hamburger.onclick = () => {
-    switch (hamburger.dataset.state) {
-        case "collapsed":
-            appMenu.dataset.state = "expanded";
-            hamburger.dataset.state = "expanded";
-            break;
-        default:
-            appMenu.dataset.state = "collapsed";
-            hamburger.dataset.state = "collapsed";
-    }
-};
 
 const getInputValue = () => {
     const chartInput = document.getElementById("chart-input");
