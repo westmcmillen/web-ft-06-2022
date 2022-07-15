@@ -277,6 +277,12 @@
     }
 }
 
+@media screen and (max-width: 500px) {
+    #CryptoCharts::before {
+        font-size: 3rem;
+    }
+}
+
 .candlestick {
     transform: scale(50%);
     height: 100%;

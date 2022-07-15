@@ -76,6 +76,17 @@
     border-radius: 0.125rem;
 }
 
+@media screen and (max-width: 600px) {
+    #contact-info {
+        flex-direction: column;
+    }
+
+    #name,
+    #email {
+        width: 100%;
+    }
+}
+
 #text-area {
     grid-column: span 2;
     width: 100%;
