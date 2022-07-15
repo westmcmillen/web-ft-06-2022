@@ -123,7 +123,6 @@ const createWick = (column, row) => {
 const getData = async ticker => {
     const response = await fetch(`https://www.alphavantage.co/query?function=CRYPTO_INTRADAY&symbol=${ticker}&market=USD&interval=5min&outputsize=full&apikey=${config.API_KEY}`);
     const data = await response.json();
-    console.log(data);
     return data;
 };
 
