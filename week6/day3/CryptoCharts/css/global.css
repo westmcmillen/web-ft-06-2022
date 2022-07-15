@@ -36,12 +36,12 @@
 .menu-link {
     padding-block: 0.5rem;
     font-size: 1.5rem;
-    color: hsl(0, 0%, 50%, 100%);
+    color: hsl(0, 0%, 75%, 100%);
     cursor: pointer;
 }
 
 .menu-link:hover {
-    color: hsl(0, 0%, 100%, 100%);
+    color: #d6634c;
 }
 
 #app-header {
@@ -104,6 +104,10 @@
     background-color: hsl(0, 0%, 100%, 100%);
     border-radius: 0.0625rem;
     cursor: inherit;
+}
+
+#hamburger:hover .hamburger-container:nth-child(2) .hamburger-icon {
+    background-color: #d6634c;
 }
 
 #hamburger[data-state="collapsed"] .hamburger-container:nth-child(1) .hamburger-icon {

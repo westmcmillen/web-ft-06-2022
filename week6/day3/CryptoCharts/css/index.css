@@ -102,6 +102,10 @@
     scroll-snap-align: start;
 }
 
+#chart-form:hover {
+    background-color: hsla(0, 0%, 15%, 100%);
+}
+
 #chart-input {
     width: 100%;
     height: 100%;
@@ -114,12 +118,8 @@
 #chart-input::placeholder {
     font-size: 1.5rem;
     font-weight: 900;
-    color: hsla(0, 0%, 50%, 100%);
-    cursor: inherit;
-}
-
-#chart-input:hover::placeholder {
     color: hsla(0, 0%, 100%, 100%);
+    cursor: inherit;
 }
 
 #chart-input:focus::placeholder {
@@ -134,12 +134,16 @@
     scroll-snap-align: start;
 }
 
-.chart-tab--inactive {
-    background-color: hsla(0, 0%, 13%, 100%);
+.chart-tab:hover {
+    background-color: hsla(0, 0%, 15%, 100%);
 }
 
 .chart-tab--active {
-    background-color: hsla(0, 0%, 20%, 100%);
+    background-color: #cd5b45;
+}
+
+.chart-tab--active:hover {
+    background-color: #d6634c;
 }
 
 .chart-ticker {
@@ -174,13 +178,9 @@
 .close-icon {
     width: 1rem;
     height: 0.25rem;
-    background-color: hsla(0, 0%, 50%, 100%);
+    background-color: hsla(0, 0%, 100%, 100%);
     border-radius: 0.125rem;
     cursor: inherit;
-}
-
-.close:hover .close-icon {
-    background-color: crimson;
 }
 
 .close-container:nth-child(1) .close-icon {
@@ -197,7 +197,7 @@
     top: 3.5rem;
     bottom: 3.5rem;
     padding-block: 0.5rem;
-    background-color: hsla(0, 0%, 15%, 100%);
+    background-color: hsla(0, 0%, 13%, 100%);
 }
 
 #chart-container {
@@ -259,6 +259,24 @@
     font-size: 10rem;
 }
 
+@media screen and (max-width: 1100px) {
+    #CryptoCharts::before {
+        font-size: 7rem;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    #CryptoCharts::before {
+        font-size: 5rem;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    #CryptoCharts::before {
+        font-size: 4rem;
+    }
+}
+
 .candlestick {
     transform: scale(50%);
     height: 100%;
@@ -284,15 +302,23 @@
     align-items: center;
     width: 50%;
     height: 100%;
-    background-color: hsla(0, 0%, 20%, 100%);
+    background-color: #cd5b45;
     cursor: pointer;
+}
+
+#zoom-out:hover {
+    background-color: #d6634c;
 }
 
 #zoom-in {
     width: 50%;
     height: 100%;
-    background-color: hsla(0, 0%, 20%, 100%);
+    background-color: #cd5b45;
     cursor: pointer;
+}
+
+#zoom-in:hover {
+    background-color: #d6634c;
 }
 
 .zoom-in-container {
@@ -307,27 +333,19 @@
 #zoom-out-icon {
     width: 1rem;
     height: 0.25rem;
-    background-color: hsla(0, 0%, 50%, 100%);
+    background-color: hsla(0, 0%, 100%, 100%);
     border-radius: 0.125rem;
     cursor: inherit;
-}
-
-#zoom-out:hover #zoom-out-icon {
-    background-color: hsla(0, 0%, 100%, 100%);
 }
 
 .zoom-in-icon {
     width: 1rem;
     height: 0.25rem;
-    background-color: hsla(0, 0%, 50%, 100%);
+    background-color: hsla(0, 0%, 100%, 100%);
     border-radius: 0.125rem;
     cursor: inherit;
 }
 
 .zoom-in-container:nth-child(1) .zoom-in-icon {
     transform: rotate(90deg);
-}
-
-#zoom-in:hover .zoom-in-icon {
-    background-color: hsla(0, 0%, 100%, 100%);
 }
