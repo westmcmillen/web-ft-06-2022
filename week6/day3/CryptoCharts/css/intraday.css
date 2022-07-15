@@ -1,4 +1,4 @@
-.menu-link:nth-child(2) {
+.menu-link:nth-child(1) {
     color: #cd5b45;
 }
 
@@ -188,7 +188,7 @@
 }
 
 .close:hover .close-icon {
-    background-color: crimson;
+    background-color: #e34542;
 }
 
 .close-container:nth-child(1) .close-icon {
