@@ -2,7 +2,7 @@
 
 ---
 
-CryptoCharts is a charting application that follows the trends and new of crypto major currencies.
+CryptoCharts is a charting application that follows trends and new stories of all major crypto currencies.
 
 <br>
 

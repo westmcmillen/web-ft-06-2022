@@ -65,7 +65,7 @@ const createChartForm = () => {
             clearInputValue();
         } else {
             tickerHash[ticker] = (tickerHash[ticker] || 0) + 1;
-            localStorage.setItem("tickers_daily", JSON.stringify(tickerHash));
+            localStorage.setItem("tickers_intraday", JSON.stringify(tickerHash));
             renderChartTab(ticker);
             renderChart(ticker);
             setTabAndChartToActive(ticker);
@@ -121,17 +121,18 @@ const createWick = (column, row) => {
 };
 
 const getData = async ticker => {
-    const response = await fetch(`https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_DAILY&symbol=${ticker}&market=USD&apikey=${config.API_KEY}`);
+    const response = await fetch(`https://www.alphavantage.co/query?function=CRYPTO_INTRADAY&symbol=${ticker}&market=USD&interval=5min&outputsize=full&apikey=${config.API_KEY}`);
     const data = await response.json();
+    console.log(data);
     return data;
 };
 
 const renderCandlesticks = async chart => {
     const data = await getData(chart.id);
-    const timeSeries = data["Time Series (Digital Currency Daily)"];
+    const timeSeries = data["Time Series Crypto (5min)"];
     const ohlc = Object.values(timeSeries);
-    const periodLow = Math.min(...ohlc.map(value => value["3a. low (USD)"]));
-    const periodHigh = Math.max(...ohlc.map(value => value["2a. high (USD)"]));
+    const periodLow = Math.min(...ohlc.map(value => value["3. low"]));
+    const periodHigh = Math.max(...ohlc.map(value => value["2. high"]));
     const periodRange = Math.ceil(periodHigh - periodLow);
 
     chart.innerHTML = null;
@@ -140,14 +141,14 @@ const renderCandlesticks = async chart => {
     let colIdx = 0;
 
     ohlc.map(value => {
-        value["1a. open (USD)"] = Math.round((value["1a. open (USD)"] - periodLow) / periodRange / 0.01);
-        value["2a. high (USD)"] = Math.round((value["2a. high (USD)"] - periodLow) / periodRange / 0.01);
-        value["3a. low (USD)"] = Math.round((value["3a. low (USD)"] - periodLow) / periodRange / 0.01);
-        value["4a. close (USD)"] = Math.round((value["4a. close (USD)"] - periodLow) / periodRange / 0.01);
+        value["1. open"] = Math.round((value["1. open"] - periodLow) / periodRange / 0.01);
+        value["2. high"] = Math.round((value["2. high"] - periodLow) / periodRange / 0.01);
+        value["3. low"] = Math.round((value["3. low"] - periodLow) / periodRange / 0.01);
+        value["4. close"] = Math.round((value["4. close"] - periodLow) / periodRange / 0.01);
 
-        const wick = createWick({ start: colIdx + 1, end: colIdx + 2 }, { start: value["2a. high (USD)"], end: value["3a. low (USD)"] });
-        const candlestick = createCandlestick({ start: colIdx, end: colIdx + 3 }, { start: value["1a. open (USD)"], end: value["4a. close (USD)"] });
-        colorCandlestick(candlestick, { start: value["1a. open (USD)"], end: value["4a. close (USD)"] });
+        const wick = createWick({ start: colIdx + 1, end: colIdx + 2 }, { start: value["2. high"], end: value["3. low"] });
+        const candlestick = createCandlestick({ start: colIdx, end: colIdx + 3 }, { start: value["1. open"], end: value["4. close"] });
+        colorCandlestick(candlestick, { start: value["1. open"], end: value["4. close"] });
         chart.append(wick);
         chart.append(candlestick);
         colIdx += 4;
@@ -185,7 +186,7 @@ const removeChart = id => {
 const removeTickerFromLocalStorage = ticker => {
     if (ticker in tickerHash) {
         delete tickerHash[ticker];
-        localStorage.setItem("tickers_daily", JSON.stringify(tickerHash));
+        localStorage.setItem("tickers_intraday", JSON.stringify(tickerHash));
     }
 };
 
@@ -288,17 +289,17 @@ zoomIn.onclick = () => {
 window.onload = () => {
     renderChartForm();
 
-    if (localStorage.tickers_daily === undefined) {
+    if (localStorage.tickers_intraday === undefined) {
         renderChart("CryptoCharts");
         return;
     }
 
-    if (Object.values(JSON.parse(localStorage.tickers_daily)).length === 0) {
+    if (Object.values(JSON.parse(localStorage.tickers_intraday)).length === 0) {
         renderChart("CryptoCharts");
         return;
     }
 
-    const tickers = JSON.parse(localStorage.getItem("tickers_daily"));
+    const tickers = JSON.parse(localStorage.getItem("tickers_intraday"));
     for (let ticker in tickers) {
         tickerHash[ticker] = (tickerHash[ticker] || 0) + 1;
         renderChartTab(ticker);
