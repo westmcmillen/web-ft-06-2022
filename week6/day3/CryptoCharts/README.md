@@ -2,7 +2,7 @@
 
 ---
 
-CryptoCharts is a charting application that follows trends and new stories of all major crypto currencies.
+CryptoCharts is a web-based charting application that follows the major market trends and latest new stories of select crypto currencies while illustrating some of the amazing possibilities of CSS grid.
 
 <br>
 
