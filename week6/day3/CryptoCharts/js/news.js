@@ -1,4 +1,5 @@
 const mainContainer = document.getElementById("main-container");
+const form = document.getElementById("form");
 const searchBar = document.getElementById("search-bar");
 
 let cards = [];
@@ -26,6 +27,7 @@ const createCard = (img, title, url, source) => {
     const link = document.createElement("a");
     link.className = "link";
     link.href = url;
+    link.target = "_blank";
     link.innerText = source;
     card.append(image, heading, link);
     return card;
@@ -49,3 +51,5 @@ searchBar.oninput = event => {
         card.element.classList.toggle("hide", !isVisiable);
     });
 };
+
+form.onsubmit = event => event.preventDefault();
