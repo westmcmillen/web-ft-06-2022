@@ -41,7 +41,7 @@
 }
 
 .menu-link:hover {
-    color: #d6634c;
+    color: hsl(0, 0%, 100%, 100%);
 }
 
 #app-header {
@@ -107,7 +107,7 @@
 }
 
 #hamburger:hover .hamburger-container:nth-child(2) .hamburger-icon {
-    background-color: #d6634c;
+    background-color: hsl(0, 0%, 100%, 100%);
 }
 
 #hamburger[data-state="collapsed"] .hamburger-container:nth-child(1) .hamburger-icon {
