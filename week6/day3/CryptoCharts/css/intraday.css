@@ -187,6 +187,10 @@
     cursor: inherit;
 }
 
+.close:hover .close-icon {
+    background-color: crimson;
+}
+
 .close-container:nth-child(1) .close-icon {
     transform: rotate(-45deg);
 }
