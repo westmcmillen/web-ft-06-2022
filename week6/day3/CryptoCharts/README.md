@@ -23,11 +23,11 @@ Developed By: West McMillen
 -   JavaScript ES6 or later
 -   index.html
 -   news.html
--   blog.html
+-   indraday.html
 -   feedback.html
 -   index.css
 -   news.css
--   blog.css
+-   indraday.css
 -   feedback.css
 -   config.js
 -   global.js
@@ -49,4 +49,4 @@ open index.html in your favorite web broswer
 
 ---
 
-https://medium.com/@westmcmillen/cryptocharts-63c8e53f6442
+https://medium.com/@westmcmillen/cryptocharts-apis-css-grid-and-javascript-16d276ec6f5c
