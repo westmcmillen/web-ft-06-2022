@@ -1,3 +1,7 @@
+.menu-link:nth-child(2) {
+    color: #cd5b45;
+}
+
 #app-main {
     position: absolute;
     inset: 0.5rem;
