@@ -49,4 +49,4 @@ open index.html in your favorite web broswer
 
 ---
 
-https://medium.com/@westmcmillen/a-simple-command-line-game-findjoe-py-63382978f0e7
+https://medium.com/@westmcmillen/cryptocharts-63c8e53f6442
