@@ -1,0 +1,111 @@
+#app-main {
+    position: absolute;
+    inset: 0.5rem;
+    top: 5.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background-color: hsla(0, 0%, 10%, 100%);
+}
+
+#main-header {
+    height: 5rem;
+}
+
+#form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    min-width: 363px;
+    max-width: 1597px;
+    margin-inline: auto;
+    height: 100%;
+    padding: 0.5rem;
+    background-color: hsla(0, 0%, 15%, 100%);
+}
+
+#search-bar {
+    background-color: hsla(0, 0%, 13%, 100%);
+    width: 100%;
+    height: 100%;
+    padding: 0.5rem 2rem;
+    border-radius: 0.125rem;
+}
+
+#submit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 0 2rem;
+    background-color: hsla(0, 0%, 20%, 100%);
+    border-radius: 0.125rem;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+    #submit {
+        display: none;
+    }
+
+    #search-bar {
+        content: "Search";
+    }
+}
+
+#main-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 0.5rem;
+    width: 100%;
+    min-width: 363px;
+    max-width: 1597px;
+    height: 100%;
+    margin-inline: auto;
+    overflow-y: scroll;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: hsla(0, 0%, 15%, 100%);
+    border-radius: 0.125rem;
+    box-shadow: 0 0.5rem 1rem hsla(0, 0%, 5%, 100%);
+}
+
+.image {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    border-radius: 0.125rem;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.heading {
+    font-weight: 900;
+    text-align: center;
+}
+
+.link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 3rem;
+    background-color: hsla(0, 0%, 20%, 100%);
+    border-radius: 0.125rem;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.link:hover {
+    background-color: seagreen;
+}

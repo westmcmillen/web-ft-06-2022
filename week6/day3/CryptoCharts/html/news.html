@@ -7,15 +7,17 @@
         <title>CryptoCharts</title>
         <link rel="stylesheet" href="../css/reset.css" />
         <link rel="stylesheet" href="../css/global.css" />
-        <link rel="stylesheet" href="../css/README.css" />
+        <link rel="stylesheet" href="../css/news.css" />
+        <script defer src="../js/config.js"></script>
         <script defer src="../js/global.js"></script>
+        <script defer src="../js/news.js"></script>
     </head>
     <body>
         <div id="app-root">
             <menu id="app-menu" data-state="collapsed">
                 <nav id="menu-container">
                     <a href="../index.html" class="menu-link">Charts</a>
-                    <a href="README.html" class="menu-link">README.md</a>
+                    <a href="news.html" class="menu-link">News</a>
                     <a href="blog.html" class="menu-link">Blog</a>
                     <a href="feedback.html" class="menu-link">Feedback</a>
                 </nav>
@@ -23,7 +25,7 @@
             <header id="app-header">
                 <div id="header-container">
                     <a href="#" class="header-link">
-                        <h1 id="brand">CryptoCharts</h1>
+                        <h1 id="brand">CryptoNews</h1>
                     </a>
                     <button id="hamburger" data-state="collapsed">
                         <div class="hamburger-container">
@@ -38,6 +40,16 @@
                     </button>
                 </div>
             </header>
+            <main id="app-main">
+                <header id="main-header">
+                    <form id="form">
+                        <!-- <h2 id="title">Lastest Stories</h2> -->
+                        <input id="search-bar" placeholder="Search" autocomplete="off" autofocus></input>
+                        <button type="submit" id="submit">Search</button>
+                    </form>
+                </header>
+                <div id="main-container"></div>
+            </main>
         </div>
     </body>
 </html>
