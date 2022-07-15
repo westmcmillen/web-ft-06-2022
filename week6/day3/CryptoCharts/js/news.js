@@ -1,4 +1,7 @@
 const mainContainer = document.getElementById("main-container");
+const searchBar = document.getElementById("search-bar");
+
+let cards = [];
 
 const getStartDate = () => {
     const date = new Date().toISOString().replace(/-/g, "").replace(/:/g, "").replace(/./g, "");
@@ -6,9 +9,8 @@ const getStartDate = () => {
 };
 
 const getData = async ticker => {
-    const response = await fetch(`https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers=CRYPTO:BTC&time_from=${getStartDate()}&limit=50&apikey=${config.API_KEY}`);
+    const response = await fetch(`https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers=CRYPTO:BTC&time_from=${getStartDate()}&limit=200&apikey=${config.API_KEY}`);
     const data = await response.json();
-    console.log(data);
     return data;
 };
 
@@ -31,10 +33,19 @@ const createCard = (img, title, url, source) => {
 
 const renderCards = async () => {
     const data = await getData();
-    for (let feed of data.feed) {
+    cards = Object.values(data.feed).map(feed => {
         const card = createCard(feed.banner_image, feed.title, feed.url, feed.source);
         mainContainer.append(card);
-    }
+        return { title: feed.title, source: feed.source, element: card };
+    });
 };
 
 renderCards();
+
+searchBar.oninput = event => {
+    const value = event.target.value.toLowerCase();
+    cards.forEach(card => {
+        const isVisiable = card.title.toLowerCase().includes(value) || card.source.toLowerCase().includes(value);
+        card.element.classList.toggle("hide", !isVisiable);
+    });
+};

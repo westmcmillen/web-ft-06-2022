@@ -9,6 +9,7 @@
 }
 
 #main-header {
+    flex-shrink: 0;
     height: 5rem;
 }
 
@@ -34,18 +35,6 @@
     border-radius: 0.125rem;
 }
 
-#submit {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    padding: 0 2rem;
-    background-color: hsla(0, 0%, 20%, 100%);
-    border-radius: 0.125rem;
-    font-weight: 900;
-    cursor: pointer;
-}
-
 @media screen and (max-width: 600px) {
     #submit {
         display: none;
@@ -54,14 +43,13 @@
 
 #main-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
     gap: 0.5rem;
     width: 100%;
     min-width: 363px;
     max-width: 1597px;
-    height: 100%;
     margin-inline: auto;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .card {
@@ -104,4 +92,8 @@
 
 .link:hover {
     background-color: seagreen;
+}
+
+.hide {
+    display: none;
 }
