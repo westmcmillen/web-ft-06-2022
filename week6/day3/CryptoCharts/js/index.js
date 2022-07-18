@@ -137,7 +137,7 @@ const renderCandlesticks = async chart => {
     chart.innerHTML = null;
     chart.style.gridTemplateColumns = `repeat(${ohlc.length * 4}, minmax(0, 1fr))`;
 
-    let colIdx = 0;
+    let colIdx = 1;
 
     ohlc.map(value => {
         value["1a. open (USD)"] = Math.round((value["1a. open (USD)"] - periodLow) / periodRange / 0.01);
