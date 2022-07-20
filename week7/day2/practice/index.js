@@ -3,6 +3,8 @@ import es6Renderer from "express-es6-template-engine";
 const app = express();
 const PORT = 3000;
 
+app.use(express.json());
+
 const todoItems = [
     { task: "Wash The Dishes" },
     { task: "Pay Off DC Loan" },
@@ -16,22 +18,28 @@ const todoItems = [
     { task: "Realize West is leaving us so that he can surf all day." },
 ];
 
-app.use(express.json);
-
 app.engine("html", es6Renderer);
 app.set("views", "templates");
 app.set("view engine", "html");
 app.use(express.static("public"));
 
-app.get("/", (req, res) => {
-    res.send("sent");
-    res.render("home", {
+// app.get("/", (req, res) => {
+//     res.render("todo", {
+//         locals: {
+//             todoItems: todoItems,
+//         },
+//     });
+// });
+
+app.post("/", (req, res) => {
+    console.log(req.body);
+    todoItems.push(req.body);
+    console.log(todoItems);
+    res.render("todo", {
         locals: {
             todoItems: todoItems,
         },
     });
 });
-
-app.post("/", (req, res) => {});
 
 app.listen(PORT, console.log(`Server is running on port ${PORT}`));
