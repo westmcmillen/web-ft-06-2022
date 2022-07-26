@@ -9,7 +9,7 @@ app.use(cors());
 app.use(express.json());
 app.use("/pets", petsRoutes);
 
-app.use(express.static("public"));
+app.use(express.static("./public"));
 app.engine("html", es6Renderer);
 app.set("views", "./public/views");
 app.set("view engine", "html");
