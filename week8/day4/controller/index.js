@@ -1,9 +1,15 @@
 const express = require("express");
 const app = express();
 const session = require("express-session");
+const sequelizeStore = require("connect-session-sequelize")(session.Store);
 const cookieParser = require("cookie-parser");
-const { User } = require("../database/models");
+const models = require("../database/models");
+const { User, Session } = require("../database/models");
 const PORT = 3000;
+
+const store = new sequelizeStore({
+  db: Session,
+});
 
 app.use(express.json());
 app.unsubscribe(cookieParser());
@@ -12,6 +18,7 @@ app.use(
     secret: "secret",
     resave: false,
     saveUninitialized: true,
+    store: store,
     cookie: {
       secure: false,
       maxAge: 2592000000,
@@ -19,14 +26,12 @@ app.use(
   }),
 );
 
-const checkLogin = (req, res, next) => {
-  if (req.session.user) {
-    next();
-  } else {
-    res.json({
-      message: "Login Required",
-    });
-  }
+store.sync();
+
+const checkLogin = async (req, res, next) => {
+  const all = await Session.findAll();
+  console.log(all);
+  res.send("Done");
 };
 
 app.get("/", (req, res) => {
@@ -34,7 +39,6 @@ app.get("/", (req, res) => {
 });
 
 app.post("/login", async (req, res) => {
-  console.log(req.session);
   const user = await User.findOne({
     where: {
       username: req.body.username,
@@ -43,7 +47,6 @@ app.post("/login", async (req, res) => {
   });
   if (user) {
     req.session.user = user;
-    console.log(req.session);
     res.json({
       message: "Login Success",
       user: user,
