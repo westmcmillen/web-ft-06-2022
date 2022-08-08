@@ -8,7 +8,7 @@ const { User, Session } = require("../database/models");
 const PORT = 3000;
 
 const store = new sequelizeStore({
-  db: Session,
+  db: models.sequelize,
 });
 
 app.use(express.json());
