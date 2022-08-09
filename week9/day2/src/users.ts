@@ -7,6 +7,12 @@ type Student = {
   ta: "Violet" | "Rayleigh";
 };
 
+type ProStudent = Student & {
+  typingSpeed: 9000;
+  jobOffers: "Google" | "Meta" | "Microsoft" | "Apple";
+  algoProficiency: "master";
+};
+
 const stacy: Student = {
   name: "Stacy",
   chatty: true,
@@ -14,4 +20,16 @@ const stacy: Student = {
   instructor: "Joe",
   employed: false,
   ta: "Violet",
+};
+
+const Amanda: ProStudent = {
+  name: "Amanda",
+  chatty: true,
+  cohort: "Full Time",
+  instructor: "Joe",
+  employed: false,
+  ta: "Violet",
+  typingSpeed: 9000,
+  jobOffers: "Google",
+  algoProficiency: "master",
 };
