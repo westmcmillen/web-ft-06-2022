@@ -33,3 +33,15 @@ const Amanda: ProStudent = {
   jobOffers: "Google",
   algoProficiency: "master",
 };
+
+const celebrateStudent = (student: Student | ProStudent): string => {
+  const employmentStatus = student.employed ? "Employed" : "Unemployed";
+  const message: string = `
+  I'm celebrating ${student.name}.
+  They are part of the ${student.cohort} cohort.
+  They are currently ${employmentStatus}.
+  `;
+  return message;
+};
+
+console.log(celebrateStudent(stacy));
