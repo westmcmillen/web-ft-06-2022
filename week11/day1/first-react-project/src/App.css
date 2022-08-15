@@ -1,0 +1,119 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.App {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: 1fr 3fr 1fr;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: hsl(0, 0%, 97%);
+}
+
+.Header {
+  grid-column: 1 / 13;
+  padding: 1rem;
+  background-color: hsl(0, 0%, 89%);
+  border: thin solid hsl(0, 0%, 55%);
+}
+
+.Menu {
+  grid-column: 1 / 4;
+  padding: 1rem;
+  background-color: hsl(0, 0%, 89%);
+  border: thin solid hsl(0, 0%, 55%);
+}
+
+.Content {
+  grid-column: 4 / 10;
+  padding: 1rem;
+  background-color: hsl(0, 0%, 89%);
+  border: thin solid hsl(0, 0%, 55%);
+}
+
+.TodoApp {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 5rem 1fr 5rem 5rem;
+  background-color: hsl(0, 0%, 97%);
+  border: thin solid hsl(0, 0%, 55%);
+}
+
+.TodoHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: hsl(0, 0%, 55%);
+  border-bottom: thin solid hsl(0, 0%, 55%);
+}
+
+.TodoList {
+  position: relative;
+}
+
+.TodoList ul {
+  position: absolute;
+  inset-block: 0;
+  inset-inline: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.5rem;
+}
+
+.TodoItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: white;
+  border: thin solid hsl(0, 0%, 55%);
+}
+
+.Task {
+  border: thin solid red;
+}
+
+.XButton {
+  padding: 0.25rem;
+  cursor: pointer;
+}
+
+.AddButton {
+  width: 100%;
+  padding-block: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: hsl(0, 0%, 55%);
+}
+
+.TodoInput {
+  position: relative;
+}
+
+.TodoInput input {
+  position: absolute;
+  inset: 0.5rem;
+  padding: 1rem;
+}
+
+.Add {
+  grid-column: 10 / 13;
+  padding: 1rem;
+  background-color: hsl(0, 0%, 89%);
+  border: thin solid hsl(0, 0%, 55%);
+}
+
+.Footer {
+  grid-column: 1 / 13;
+  padding: 1rem;
+  background-color: hsl(0, 0%, 89%);
+  border: thin solid hsl(0, 0%, 55%);
+}
