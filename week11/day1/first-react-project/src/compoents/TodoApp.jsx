@@ -13,7 +13,7 @@ export default function TodoApp() {
       <TodoHeader />
       <TodoList tasks={tasks} setTasks={setTasks} />
       <TodoInput inputValue={inputValue} setInputValue={setInputValue} />
-      <AddButton setTasks={setTasks} inputValue={inputValue} setInputValue={setInputValue} />
+      <AddButton tasks={tasks} setTasks={setTasks} inputValue={inputValue} setInputValue={setInputValue} />
     </div>
   );
 }

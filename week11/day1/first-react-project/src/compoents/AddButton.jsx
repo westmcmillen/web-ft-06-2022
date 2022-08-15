@@ -1,4 +1,4 @@
-export default function AddButton({ inputValue, setInputValue, setTasks }) {
+export default function AddButton({ inputValue, setInputValue, tasks, setTasks }) {
   return (
     <button
       className="AddButton"
