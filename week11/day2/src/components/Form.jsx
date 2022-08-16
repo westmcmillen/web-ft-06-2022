@@ -7,20 +7,16 @@ export default function Form({ defaultForm, formData, setFormData }) {
       switch (input) {
         case "firstName":
           const isFirstNameValidated = formData.firstName.replace(" ", "") !== "";
-          // console.log("First Name: ", isFirstNameValidated);
           return isFirstNameValidated;
         case "lastName":
           const isLastNameValidated = formData.lastName.replace(" ", "") !== "";
-          // console.log("Last Name: ", isLastNameValidated);
           return isLastNameValidated;
         case "email":
           const regexEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
           const isEmailValidated = regexEmail.test(formData.email);
-          // console.log("Email Name: ", isEmailValidated);
           return isEmailValidated;
         case "password":
           const isPasswordValidated = formData.password.replace(" ", "") !== "";
-          // console.log("Password Name: ", isPasswordValidated);
           return isPasswordValidated;
         default:
           return false;
@@ -96,10 +92,10 @@ export default function Form({ defaultForm, formData, setFormData }) {
         />
         <input type="submit" value="Submit" className="py-2 px-4 bg-indigo-500 rounded text-neutral-50" />
         <div className="flex gap-x-4">
-          <a href="http://www.facebook.com/" target={"_blank"} className="w-full">
+          <a href="http://www.facebook.com/" target={"_blank"} rel="noreferrer" className="w-full">
             <span className="flex justify-center items-center py-2 px-4 border border-neutral-300 rounded">Facebook</span>
           </a>
-          <a href="http://www.twitter.com/" target={"_blank"} className="w-full">
+          <a href="http://www.twitter.com/" target={"_blank"} rel="noreferrer" className="w-full">
             <span className="flex justify-center items-center py-2 px-4 border border-neutral-300 rounded">Twitter</span>
           </a>
         </div>
