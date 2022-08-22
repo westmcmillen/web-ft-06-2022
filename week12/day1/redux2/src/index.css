@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.fill {
+  @apply w-full h-full;
+}
+
+.button {
+  @apply py-3 px-5 border border-black rounded;
+}
